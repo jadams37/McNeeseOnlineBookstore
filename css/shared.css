@@ -6,22 +6,22 @@
     --nav-logo-color: #FFD203;
     --nav-sep-color: #FFD203;
     --nav-label-color: #FFFFFF;
-    --nav-logo-font-size: 48;
-    --nav-label-font-size: 20;
+    --nav-logo-font-size: 48px;
+    --nav-label-font-size: 20px;
 
     --page-bg-color: #FFFFFF;
 }
 
 /* Logo Font */
 .hina-mincho-regular {
-  font-family: "Hina Mincho", serif;
+  font-family: "Hina Mincho", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
 
 /* Content Title/Navbar Font */
 .kaisei-opti-regular {
-  font-family: "Kaisei Opti", serif;
+  font-family: "Kaisei Opti", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -37,6 +37,7 @@ html {
     background-color: var(--page-bg-color);
 }
 
+/* Remove gaps */
 body {
     margin: 0;
 }
@@ -47,5 +48,140 @@ article {
 }
 
 header, footer {
+    display: flex;
     background-color: var(--nav-bg-color);
+    color: var(--nav-label-color);
+    align-items: center;
+}
+
+.nav-head {
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+}
+
+/* First Set of Nav Element(s) (Logo) */
+.nav-start {
+    display: flex;
+    margin-left: 32px;
+    margin-bottom: 16px;
+}
+
+/* Second Set of Nav Element(s) (Search Bar) */
+.nav-center {
+    display: flex;
+    margin-left: auto;
+}
+
+/* Third Set of Nav Element(s) (Cart/Profile) */
+.nav-end {
+    display: flex;
+    margin-left: auto;
+    margin-right: 32px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-label {
+    font-family: Hina Mincho, serif;
+    font-size: var(--nav-logo-font-size);
+    color: var(--nav-logo-color);
+    text-decoration: none;
+}
+
+/* Search Container */
+.search {
+    width: 592px;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    border-radius: 8px;
+    background-color: #f6f6f6;
+    transition: box-shadow 0.25s;
+}
+
+/* Animates search bar icon on selection */
+.search:focus-within .search-icon {
+    color:rgba(0, 0, 0, 0.75);
+}
+
+/* Input Bar of Search Container */
+.search-input {
+    font-size: 16px;
+    font-family: sans-serif;
+    color: #333333;
+    margin-left: 14px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+/* Place holder text of search input */
+.search-input::placeholder {
+    color: rgba(0, 0, 0, 0.25)
+}
+
+.search-icon {
+    color:rgba(0, 0, 0, 0.25);
+    transition: color 0.25s;
+}
+
+.cart {
+    display: flex;
+    align-items: center;
+}
+
+.cart-icon img {
+    height: 48px;
+    width: 48px;
+    transition: opacity 0.25s;
+}
+
+.cart-label, .profile-label {
+    color: var(--nav-label-color);
+    font-family: Kaisei Opti, sans-serif;
+    font-size: var(--nav-label-font-size);
+    text-decoration: none;
+    transition: color 0.25s;
+}
+
+.cart:hover .cart-label, .profile:hover .profile-label {
+    color: rgba(255, 255, 255, 0.25)
+}
+
+.cart:hover .cart-icon img, .profile:hover .profile-icon img {
+    opacity: 0.25;
+}
+
+.separator {
+    width: 3px;
+    height: 48px;
+    border-radius: 3px;
+    background-color: var(--nav-sep-color);
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    
+}
+
+.profile-icon img {
+    height: 48px;
+    width: 48px;
+    transition: opacity 0.25s;
+}
+
+header {
+    height: 65px;
+}
+
+footer {
+    height: 157px;
 }
