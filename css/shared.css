@@ -8,6 +8,7 @@
     --nav-label-color: #FFFFFF;
     --nav-logo-font-size: 48px;
     --nav-label-font-size: 20px;
+    --nav-subtext-font-size: 16px;
 
     --page-bg-color: #FFFFFF;
 }
@@ -50,7 +51,6 @@ article {
 header, footer {
     display: flex;
     background-color: var(--nav-bg-color);
-    color: var(--nav-label-color);
     align-items: center;
 }
 
@@ -87,7 +87,7 @@ header, footer {
 }
 
 .logo-label {
-    font-family: Hina Mincho, serif;
+    font-family: Hina Mincho;
     font-size: var(--nav-logo-font-size);
     color: var(--nav-logo-color);
     text-decoration: none;
@@ -143,7 +143,7 @@ header, footer {
 
 .cart-label, .profile-label {
     color: var(--nav-label-color);
-    font-family: Kaisei Opti, sans-serif;
+    font-family: Kaisei Opti;
     font-size: var(--nav-label-font-size);
     text-decoration: none;
     transition: color 0.25s;
@@ -180,6 +180,65 @@ header, footer {
 
 header {
     height: 65px;
+}
+
+.nav-foot {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.contact, .foot-center, .foot-end {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.foot-start {
+    margin-left: 256px;
+}
+
+.contact:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--nav-label-color);
+}
+
+.contact-label, .hours-label, .social-label {
+    font-family: Kaisei Opti;
+    font-size: var(--nav-label-font-size);
+    text-decoration: none;
+    color: var(--nav-label-color);
+}
+
+.contact-subtext, .hours-subtext {
+    font-family: Questrial;
+    font-size: var(--nav-subtext-font-size);
+    text-decoration: none;
+    color: var(--nav-label-color)
+}
+
+.foot-center {
+    margin-left: auto;
+}
+
+.social-links {
+    display: flex;
+}
+
+.social-icon img {
+    height: 48px;
+    width: 48px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.social-icon img:hover {
+    outline: var(--nav-label-color) solid 1px
+}
+
+.foot-end {
+    margin-left: auto;
+    margin-right: 256px;
 }
 
 footer {
