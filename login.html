@@ -10,7 +10,7 @@
         <meta name="description" content="Online bookstore to buy textbooks and supplies."/>
 
         <!-- Replace 'author' with your name -->
-        <meta name="author" content="Jordan, CCS"/>
+        <meta name="author" content="Jordan Adams, CCS"/>
 
         <!-- Change 'template' with your page title -->
         <title>McNeese Bookstore: Login</title>
@@ -19,6 +19,35 @@
         <link rel="stylesheet" href="css/login.css">
     </head>
     <body>
-        
+        <article>
+            <div class="page-content">
+                <div class="page-center">
+                    <div class="logo-content">
+                        <p class="logo-label">McNeese</p>
+                        <img src="icons/logo.png">
+                        <p class="logo-label">Bookstore</p>
+                    </div>
+                    <div class="login-content">
+                        <p class="login-label">Login</p>
+                        <div class="login-input">
+                            <form action="" id="login">
+                                <label for="username" class="username-label">Username/Email</label><br>
+                                <input class="username-input" id="username" type="text"><br>
+                                <label for="password" class="password-label">Password</label><br>
+                                <input class="password-input" id="password" type="password"><br>
+                                <label for="remember" class="remember-label">Remember me</label>
+                                <input class="remember-input" id="remember" type="checkbox">
+                                <a href="" class="forgot-pass-label">Forgot password?</a>
+                            </form>
+                            <button type="submit" value="login" form="login">Login</button>
+                        </div>
+                        <div class="register-content">
+                            <p class="register-label">New user?</p>
+                            <a href="" class="register">Sign up</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
     </body>
 </html>

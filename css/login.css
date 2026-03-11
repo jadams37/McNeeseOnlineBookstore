@@ -5,9 +5,12 @@
     --logo-color: #FFD203;
     --border-color: #FFD203;
     --content-bg-color: #FFFFFF;
-    --logo-font-size: 48px;
+
+    --logo-font-size: 64px;
+    --login-label-font-size: 48px;
+    --input-label-font-size: 24px;
     --label-font-size: 20px;
-    --subtext-font-size: 16px;
+    --subtext-font-size: 18px;
 }
 
 /* Logo Font */
@@ -29,4 +32,102 @@
   font-family: "Questrial", sans-serif;
   font-weight: 400;
   font-style: normal;
+}
+
+html {
+    background-color: var(--bg-color);
+}
+
+body {
+    margin: 0;
+}
+
+article {
+    
+}
+
+.page-content {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-center {
+    height: 720px;
+    width: 958px;
+    display: flex;
+    align-items: center;
+}
+
+.logo-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 720px;
+    width: 457px;
+}
+
+.logo-label {
+    font-family: Hina Mincho;
+    font-size: var(--logo-font-size);
+    color: var(--logo-color);
+    margin: 0;
+}
+
+.logo-content img {
+    height: 480px;
+    width: 480px;
+    border-radius: 1000px;
+    filter: drop-shadow(0px 0px 10px #000000)
+}
+
+.login-content {
+    height: 560px;
+    width: 457px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--content-bg-color);
+    border: 4px solid var(--border-color);
+    border-radius: 48px;
+    margin-left: 32px;
+    align-items: center;
+}
+
+.login-label {
+    font-family: Kaisei Opti;
+    font-size: var(--login-label-font-size);
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.login-input {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+}
+
+.username-input, .password-input {
+    width: 100%;
+}
+
+.username-input {
+    margin-bottom: 32px;
+}
+
+.username-label, .password-label {
+    font-family: Kaisei Opti;
+    font-size: var(--input-label-font-size);
+}
+
+.remember-label, .forgot-pass-label {
+    font-family: Questrial;
+    font-size: var(--subtext-font-size)
+}
+
+.register-content {
+    display: flex;
+    margin-top: auto;
+    align-items: center;
 }
