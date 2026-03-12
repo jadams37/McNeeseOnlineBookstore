@@ -5,6 +5,8 @@
     --logo-color: #FFD203;
     --border-color: #FFD203;
     --content-bg-color: #FFFFFF;
+    --button-color: #FFD203;
+    --button-highlight-color: #e6bd03;
 
     --logo-font-size: 64px;
     --login-label-font-size: 48px;
@@ -106,10 +108,13 @@ article {
     display: flex;
     flex-direction: column;
     margin-top: auto;
+    align-items: center;
 }
 
 .username-input, .password-input {
+    height: 24px;
     width: 100%;
+    font-size: var(--subtext-font-size)
 }
 
 .username-input {
@@ -121,13 +126,38 @@ article {
     font-size: var(--input-label-font-size);
 }
 
-.remember-label, .forgot-pass-label {
+.remember-label, .forgot-pass-label, .register-content {
     font-family: Questrial;
     font-size: var(--subtext-font-size)
+}
+
+.remember-label {
+    margin-right: 24px;
 }
 
 .register-content {
     display: flex;
     margin-top: auto;
     align-items: center;
+}
+
+.login-button {
+    margin-top: 8px;
+    height: 48px;
+    width: 180px;
+    font-family: Questrial;
+    font-weight: bold;
+    font-size: var(--input-label-font-size);
+    background-color: var(--button-color);
+    border: none;
+    border-radius: 34px;
+    transition: background-color 0.25s;
+}
+
+.login-button:hover {
+    background-color: var(--button-highlight-color);
+}
+
+.register-label {
+    margin-right: 4px;
 }
