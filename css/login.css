@@ -85,7 +85,7 @@ article {
     filter: drop-shadow(0px 0px 10px #000000)
 }
 
-.login-content {
+.login-content, .signup-content {
     height: 560px;
     width: 457px;
     display: flex;
@@ -97,31 +97,35 @@ article {
     align-items: center;
 }
 
-.login-label {
+.login-label, .signup-label {
     font-family: Kaisei Opti;
     font-size: var(--login-label-font-size);
     margin-top: 0px;
     margin-bottom: 0px;
 }
 
-.login-input {
+.login-input, .signup-input {
     display: flex;
     flex-direction: column;
     margin-top: auto;
     align-items: center;
 }
 
-.username-input, .password-input {
+.signup-form {
+    width: 317px;
+}
+
+.username-input, .password-input, .email-input, .name-input, .address-input, .phone-input {
     height: 24px;
     width: 100%;
     font-size: var(--subtext-font-size)
 }
 
-.username-input {
+.username-input, .email-input, .name-input, .address-input {
     margin-bottom: 32px;
 }
 
-.username-label, .password-label {
+.username-label, .password-label, .email-label, .name-label, .address-label, .phone-label {
     font-family: Kaisei Opti;
     font-size: var(--input-label-font-size);
 }
@@ -141,7 +145,7 @@ article {
     align-items: center;
 }
 
-.login-button {
+.login-button, .next-button {
     margin-top: 8px;
     height: 48px;
     width: 180px;
@@ -154,7 +158,7 @@ article {
     transition: background-color 0.25s;
 }
 
-.login-button:hover {
+.login-button:hover, .next-button:hover {
     background-color: var(--button-highlight-color);
 }
 

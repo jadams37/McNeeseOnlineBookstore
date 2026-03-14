@@ -13,10 +13,11 @@
         <meta name="author" content="Jordan Adams, CCS"/>
 
         <!-- Change 'template' with your page title -->
-        <title>McNeese Bookstore: Login</title>
+        <title>McNeese Bookstore: Signup</title>
 
         <!-- Styling/Script Links -->
         <link rel="stylesheet" href="css/login.css">
+        <script src="scripts/signup-next-form.js"></script>
     </head>
     <body>
         <article>
@@ -27,23 +28,22 @@
                         <img src="icons/logo.png">
                         <p class="logo-label">Bookstore</p>
                     </div>
-                    <div class="login-content">
-                        <p class="login-label">Login</p>
-                        <div class="login-input">
-                            <form class="login-form" action="" id="login">
-                                <label for="username" class="username-label">Username/Email</label><br>
+                    <div class="signup-content">
+                        <p class="signup-label">Signup</p>
+                        <div class="signup-input">
+                            <form class="signup-form" action="" id="signup">
+                                <label for="email" class="email-label">Email</label><br>
+                                <input class="email-input" id="email" type="text"><br>
+                                <label for="username" class="username-label">Username</label><br>
                                 <input class="username-input" id="username" type="text"><br>
                                 <label for="password" class="password-label">Password</label><br>
                                 <input class="password-input" id="password" type="password"><br>
-                                <input class="remember-input" id="remember" type="checkbox">
-                                <label for="remember" class="remember-label">Remember me</label>
-                                <a href="" class="forgot-pass-label">Forgot password?</a>
                             </form>
-                            <button class="login-button" type="submit" value="login" form="login">Login</button>
+                            <button class="next-button" id="next" type="button" onclick="nextForm()">Next</button>
                         </div>
                         <div class="register-content">
-                            <p class="register-label">New user?</p>
-                            <a href="signup.html" class="register">Sign up</a>
+                            <p class="register-label">Already registered?</p>
+                            <a href="login.html" class="register">Login</a>
                         </div>
                     </div>
                 </div>
