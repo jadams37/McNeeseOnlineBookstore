@@ -9,9 +9,14 @@ function nextForm() {
     const form = document.getElementById('signup');
     const button = document.getElementById('next');
 
-    form.innerHTML = newFormInput;
-    button.textContent = "Register"
-    button.type = "submit"
-    button.onclick = ""
+    document.querySelectorAll('#signup > *').forEach(element => {
+        element.hidden = true;
+    })
+
+    form.innerHTML += newFormInput;
+
+    button.textContent = "Register";
+    button.type = "submit";
+    button.onclick = "";
     
 }
