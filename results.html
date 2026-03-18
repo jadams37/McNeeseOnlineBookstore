@@ -18,6 +18,7 @@
 
         <!-- Styling/Script Links -->
         <link rel="stylesheet" href="css/shared.css">
+        <link rel="stylesheet" href="css/results.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search">
     </head>
     <body>
@@ -55,7 +56,42 @@
             <div class="page-content">
                 <div class="results-container">
                     <div class="results-top">
-                        <p>Results for [item]</p>
+                        <div class="results-title">
+                            <p>Results for item</p>
+                        </div>
+                        <div class="sort-container">
+                            <form class="sort-form" action="" id="sort">
+                                <label for="sort-by" class="sort-label">Sort By</label>
+                                <select class="sort-drop" id="sort">
+                                    <option value="ascending">Ascending Order</option>
+                                    <option value="descending">Descending Order</option>
+                                    <option value="asc-price">Low to High Price</option>
+                                    <option value="desc-price">High to Low Price</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="results-bottom">
+                        <div class="filter-container">
+                            <form class="filter-form" action="" id="filter">
+                                <p class="filter-title">Filter</p>
+                                <div class="filter-separator"></div>
+                                <p class="filter-type">Product Type</p>
+                                <input class="filter-input" id="books" type="checkbox" name="books">
+                                <label for="books" class="filter-input-label">Books</label><br>
+                                <input class="filter-input" id="supplies" type="checkbox" name="supplies">
+                                <label for="supplies" class="filter-input-label">Supplies</label>
+                                <p class="filter-type">Condition</p>
+                                <input class="filter-input" id="new" type="checkbox" name="new">
+                                <label for="new" class="filter-input-label">New</label><br>
+                                <input class="filter-input" id="used" type="checkbox" name="used">
+                                <label for="used" class="filter-input-label">Used</label>
+                            </form>
+                        </div>
+                        <div class="products-container">
+                            <div class="product">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
