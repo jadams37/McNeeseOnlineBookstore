@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Kaisei+Opti&family=Questrial&display=swap');
+
+:root {
+    --content-bg-color: #EBEBEB;
+    --button-color: #FFD203;
+    --button-highlight-color: #e6bd03;
+
+    --login-label-font-size: 48px;
+    --input-label-font-size: 24px;
+    --label-font-size: 20px;
+    --subtext-font-size: 18px;
+}
+
+/* Logo Font */
+.hina-mincho-regular {
+  font-family: "Hina Mincho", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Content Title/Navbar Font */
+.kaisei-opti-regular {
+  font-family: "Kaisei Opti", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Subcontent Font */
+.questrial-regular {
+  font-family: "Questrial", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.page-content {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.results-container {
+    height: 710px;
+    width: 1124px;
+    display: flex;
+    align-items: center;
+}
