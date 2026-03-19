@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="Marketplace, Shopping, Store, Books, Bookstore"/>
+        <meta name="description" content="Online bookstore homepage for McNeese students."/>
+        <meta name="author" content="Luke Pickle"/>
+        <title>McNeese Bookstore: Home</title>
+
+        <link rel="stylesheet" href="css/shared.css">
+        <link rel="stylesheet" href="css/results.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search">
+
+        <style>
+            .results-container {
+                height: auto;
+                min-height: 710px;
+            }
+
+            .results-title p {
+                margin: 0;
+            }
+
+            .results-bottom {
+                align-items: flex-start;
+            }
+
+            .filter-form {
+                width: 150px;
+            }
+
+            .products-container {
+                overflow: visible;
+                height: auto;
+                grid-template-columns: repeat(4, 240px);
+                grid-auto-rows: 280px;
+            }
+
+            .product {
+                box-sizing: border-box;
+                padding: 14px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                border: 1px solid #d8d8d8;
+            }
+
+            .product-banner {
+                grid-column: span 2;
+                width: 492px;
+                background: linear-gradient(135deg, #00529B, #1b6fbc);
+                color: #FFFFFF;
+                border: none;
+            }
+
+            .product-banner .product-name,
+            .product-banner .product-copy,
+            .product-banner .product-price {
+                color: #FFFFFF;
+            }
+
+            .product-label {
+                width: fit-content;
+                padding: 4px 10px;
+                background-color: #FFD203;
+                color: #000000;
+                font-family: Questrial;
+                font-size: 12px;
+                font-weight: bold;
+                border-radius: 4px;
+            }
+
+            .product-name {
+                font-family: Kaisei Opti;
+                font-size: 22px;
+                font-weight: bold;
+                margin: 10px 0 6px 0;
+                line-height: 1.15;
+            }
+
+            .product-copy {
+                font-family: Questrial;
+                font-size: 14px;
+                line-height: 1.35;
+                margin: 0;
+                color: #333333;
+            }
+
+            .product-meta {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 12px;
+                gap: 8px;
+            }
+
+            .product-price {
+                font-family: Kaisei Opti;
+                font-size: 20px;
+                font-weight: bold;
+                color: #00529B;
+            }
+
+            .product-action {
+                background-color: #FFD203;
+                color: #000000;
+                font-family: Questrial;
+                font-size: 13px;
+                font-weight: bold;
+                text-decoration: none;
+                padding: 8px 12px;
+                border-radius: 4px;
+                border: 1px solid #d4b000;
+            }
+
+            .product-action:hover {
+                background-color: #e6bd03;
+            }
+
+            .feature-list {
+                margin: 10px 0 0 18px;
+                padding: 0;
+                font-family: Questrial;
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            .subtle-link {
+                font-family: Questrial;
+                font-size: 13px;
+                color: #00529B;
+                text-decoration: none;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <nav class="nav-head">
+                <div class="nav-start">
+                    <div class="logo">
+                        <a class="logo-label" href="homepage_exact_match.html">McNeese Bookstore</a>
+                    </div>
+                </div>
+                <div class="nav-center">
+                    <form action="results.html">
+                        <div class="search">
+                            <span class="search-icon material-symbols-outlined">search</span>
+                            <input class="search-input" type="search" placeholder="Search textbooks, merch, supplies" name="q">
+                        </div>
+                    </form>
+                </div>
+                <div class="nav-end">
+                    <div class="cart">
+                        <a href="" class="cart-label">Cart</a>
+                        <a href="" class="cart-icon"><img src="icons/cart.svg" alt="Cart"></a>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="profile">
+                        <a href="login.html" class="profile-label">Profile</a>
+                        <a href="login.html" class="profile-icon"><img src="icons/profile.svg" alt="Profile"></a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <article>
+            <div class="page-content">
+                <div class="results-container">
+                    <div class="results-top">
+                        <div class="results-title">
+                            <p>Home</p>
+                        </div>
+                        <div class="sort-container">
+                            <form class="sort-form" action="" id="sort">
+                                <label for="sort-by" class="sort-label">Featured</label>
+                                <select class="sort-drop" id="sort-by">
+                                    <option value="popular">Most Popular</option>
+                                    <option value="new">New Arrivals</option>
+                                    <option value="deals">Best Deals</option>
+                                    <option value="pickup">Ready for Pickup</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="results-bottom">
+                        <div class="filter-container">
+                            <form class="filter-form" action="" id="filter">
+                                <p class="filter-title">Browse</p>
+                                <div class="filter-separator"></div>
+
+                                <p class="filter-type">Department</p>
+                                <input class="filter-input" id="textbooks" type="checkbox" name="textbooks">
+                                <label for="textbooks" class="filter-input-label">Textbooks</label><br>
+                                <input class="filter-input" id="supplies" type="checkbox" name="supplies">
+                                <label for="supplies" class="filter-input-label">Supplies</label><br>
+                                <input class="filter-input" id="merch" type="checkbox" name="merch">
+                                <label for="merch" class="filter-input-label">Merch</label>
+
+                                <p class="filter-type">Need It Fast?</p>
+                                <input class="filter-input" id="pickup" type="checkbox" name="pickup">
+                                <label for="pickup" class="filter-input-label">Pickup</label><br>
+                                <input class="filter-input" id="shipping" type="checkbox" name="shipping">
+                                <label for="shipping" class="filter-input-label">Shipping</label>
+                            </form>
+                        </div>
+
+                        <div class="products-container">
+                            <div class="product product-banner">
+                                <div>
+                                    <div class="product-label">WELCOME</div>
+                                    <p class="product-name">Your campus essentials in one place</p>
+                                    <p class="product-copy">Shop course materials, school supplies, and McNeese gear with the same layout style already used in the project.</p>
+                                    <ul class="feature-list">
+                                        <li>Search from the header</li>
+                                        <li>Browse by department</li>
+                                        <li>Move to results and login pages easily</li>
+                                    </ul>
+                                </div>
+                                <div class="product-meta">
+                                    <span class="product-price">Start Here</span>
+                                    <a class="product-action" href="results.html">Open Results</a>
+                                </div>
+                            </div>
+
+                            <div class="product">
+                                <div>
+                                    <div class="product-label">COURSES</div>
+                                    <p class="product-name">Spring Textbooks</p>
+                                    <p class="product-copy">Required books, access codes, and used copies for common classes.</p>
+                                </div>
+                                <div class="product-meta">
+                                    <span class="product-price">From $24.99</span>
+                                    <a class="product-action" href="results.html">View Items</a>
+                                </div>
+                            </div>
+
+                            <div class="product">
+                                <div>
+                                    <div class="product-label">POPULAR</div>
+                                    <p class="product-name">Best Sellers</p>
+                                    <p class="product-copy">A quick section for the items students are buying the most right now.</p>
+                                </div>
+                                <div class="product-meta">
+                                    <span class="product-price">Top Picks</span>
+                                    <a class="product-action" href="results.html">Browse</a>
+                                </div>
+                            </div>
+
+                            <div class="product">
+                                <div>
+                                    <div class="product-label">SUPPLIES</div>
+                                    <p class="product-name">Classroom Basics</p>
+                                    <p class="product-copy">Pens, notebooks, folders, calculators, and day-one essentials.</p>
+                                </div>
+                                <div class="product-meta">
+                                    <span class="product-price">From $3.99</span>
+                                    <a class="product-action" href="results.html">Shop Now</a>
+                                </div>
+                            </div>
+
+                            <div class="product">
+                                <div>
+                                    <div class="product-label">MERCH</div>
+                                    <p class="product-name">McNeese Apparel</p>
+                                    <p class="product-copy">Hoodies, tees, and spirit wear for students, alumni, and family.</p>
+                                </div>
+                                <div class="product-meta">
+                                    <span class="product-price">From $19.99</span>
+                                    <a class="product-action" href="results.html">See More</a>
+                                </div>
+                            </div>
+
+                            <div class="product">
+                                <div>
+                                    <div class="product-label">DEALS</div>
+                                    <p class="product-name">Featured Discount</p>
+                                    <p class="product-copy">Bundle notebooks, highlighters, and index cards for a lower price.</p>
+                                </div>
+                                <div class="product-meta">
+                                    <span class="product-price">Save 15%</span>
+                                    <a class="product-action" href="results.html">Get Deal</a>
+                                </div>
+                            </div>
+
+                            <div class="product">
+                                <div>
+                                    <div class="product-label">TECH</div>
+                                    <p class="product-name">Study Accessories</p>
+                                    <p class="product-copy">Headphones, chargers, flash drives, and other campus tech add-ons.</p>
+                                </div>
+                                <div class="product-meta">
+                                    <span class="product-price">From $12.99</span>
+                                    <a class="product-action" href="results.html">Explore</a>
+                                </div>
+                            </div>
+
+                            <div class="product">
+                                <div>
+                                    <div class="product-label">READY</div>
+                                    <p class="product-name">Quick Pickup</p>
+                                    <p class="product-copy">Order online and pick up your items before class starts.</p>
+                                </div>
+                                <div class="product-meta">
+                                    <span class="product-price">Fast</span>
+                                    <a class="product-action" href="results.html">Choose</a>
+                                </div>
+                            </div>
+
+                            <div class="product">
+                                <div>
+                                    <div class="product-label">ACCOUNT</div>
+                                    <p class="product-name">Student Login</p>
+                                    <p class="product-copy">Access your account, saved items, and order information.</p>
+                                </div>
+                                <div class="product-meta">
+                                    <span class="product-price">Secure</span>
+                                    <a class="product-action" href="login.html">Login</a>
+                                </div>
+                            </div>
+
+                            <div class="product">
+                                <div>
+                                    <div class="product-label">NEW USER</div>
+                                    <p class="product-name">Create Account</p>
+                                    <p class="product-copy">Set up a new account to start shopping and manage purchases.</p>
+                                </div>
+                                <div class="product-meta">
+                                    <span class="product-price">Easy Setup</span>
+                                    <a class="product-action" href="signup.html">Sign Up</a>
+                                </div>
+                            </div>
+
+                            <div class="product">
+                                <div>
+                                    <div class="product-label">INFO</div>
+                                    <p class="product-name">Store Announcements</p>
+                                    <p class="product-copy">Book buyback dates, semester reminders, and pickup notices.</p>
+                                </div>
+                                <div class="product-meta">
+                                    <span class="product-price">Updates</span>
+                                    <a class="subtle-link" href="">Read More</a>
+                                </div>
+                            </div>
+
+                            <div class="product">
+                                <div>
+                                    <div class="product-label">HELP</div>
+                                    <p class="product-name">Need Assistance?</p>
+                                    <p class="product-copy">Use the footer contact area for questions about orders, books, or availability.</p>
+                                </div>
+                                <div class="product-meta">
+                                    <span class="product-price">Support</span>
+                                    <a class="subtle-link" href="">Contact</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <footer>
+            <nav class="nav-foot">
+                <div class="foot-start">
+                    <div class="contact">
+                        <a class="contact-label" href="">Contact Us</a>
+                        <a class="contact-subtext" href="">Having issues with your order? Have any questions?<br>Please reach out to us if so.</a>
+                    </div>
+                </div>
+                <div class="foot-center">
+                    <a class="hours-label">Store Hours</a>
+                    <a class="hours-subtext">Monday - Wednesday: 7:30 AM - 5:00 PM<br>Thursday: 7:30 AM - 6:00 PM<br>Friday: 7:30 AM - 11:30 AM</a>
+                </div>
+                <div class="foot-end">
+                    <a class="social-label">Follow Us</a>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com" class="social-icon"><img src="icons/facebook.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com" class="social-icon"><img src="icons/instagram.png" alt="Instagram"></a>
+                        <a href="https://www.tiktok.com" class="social-icon"><img src="icons/tiktok.png" alt="TikTok"></a>
+                    </div>
+                </div>
+            </nav>
+        </footer>
+    </body>
+</html>
