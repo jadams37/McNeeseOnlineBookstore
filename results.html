@@ -1,0 +1,145 @@
+<!-- This page serves as template for the majority of the pages
+     to maintain consistency throughout the website. Add more
+     elements as needed for your page's needs. -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Metadata -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="Marketplace, Shopping, Store, Books, Bookstore"/>
+        <meta name="description" content="Online bookstore to buy textbooks and supplies."/>
+
+        <!-- Replace 'author' with your name -->
+        <meta name="author" content="Jordan Adams, CCS"/>
+
+        <!-- Change 'template' with your page title -->
+        <title>McNeese Bookstore: Results</title>
+
+        <!-- Styling/Script Links -->
+        <link rel="stylesheet" href="css/shared.css">
+        <link rel="stylesheet" href="css/results.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search">
+    </head>
+    <body>
+        <!-- Navigation Bar -->
+        <header>
+            <nav class="nav-head">
+                <div class="nav-start">
+                    <div class="logo">
+                        <a class="logo-label" href="">McNeese Bookstore</a>
+                    </div>
+                </div>
+                <div class="nav-center">
+                    <form action="">
+                        <div class="search">
+                            <span class="search-icon material-symbols-outlined">search</span>
+                            <input class="search-input" type="search" placeholder="Search">
+                        </div>
+                    </form>
+                </div>
+                <div class="nav-end">
+                    <div class="cart">
+                        <a href="" class="cart-label">Cart</a>
+                        <a href="" class="cart-icon"><img src="icons/cart.svg"></a>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="profile">
+                        <a href="" class="profile-label">Profile</a>
+                        <a href="" class="profile-icon"><img src="icons/profile.svg"></a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <!-- Main content of page-->
+        <article>
+            <div class="page-content">
+                <div class="results-container">
+                    <div class="results-top">
+                        <div class="results-title">
+                            <p>Results for item</p>
+                        </div>
+                        <div class="sort-container">
+                            <form class="sort-form" action="" id="sort">
+                                <label for="sort-by" class="sort-label">Sort By</label>
+                                <select class="sort-drop" id="sort">
+                                    <option value="ascending">Ascending Order</option>
+                                    <option value="descending">Descending Order</option>
+                                    <option value="asc-price">Low to High Price</option>
+                                    <option value="desc-price">High to Low Price</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="results-bottom">
+                        <div class="filter-container">
+                            <form class="filter-form" action="" id="filter">
+                                <p class="filter-title">Filter</p>
+                                <div class="filter-separator"></div>
+                                <p class="filter-type">Product Type</p>
+                                <input class="filter-input" id="books" type="checkbox" name="books">
+                                <label for="books" class="filter-input-label">Books</label><br>
+                                <input class="filter-input" id="supplies" type="checkbox" name="supplies">
+                                <label for="supplies" class="filter-input-label">Supplies</label>
+                                <p class="filter-type">Condition</p>
+                                <input class="filter-input" id="new" type="checkbox" name="new">
+                                <label for="new" class="filter-input-label">New</label><br>
+                                <input class="filter-input" id="used" type="checkbox" name="used">
+                                <label for="used" class="filter-input-label">Used</label>
+                            </form>
+                        </div>
+                        <div class="products-container">
+                            <div class="product">
+                            </div>
+                            <div class="product">
+                            </div>
+                            <div class="product">
+                            </div>
+                            <div class="product">
+                            </div>
+                            <div class="product">
+                            </div>
+                            <div class="product">
+                            </div>
+                            <div class="product">
+                            </div>
+                            <div class="product">
+                            </div>
+                            <div class="product">
+                            </div>
+                            <div class="product">
+                            </div>
+                            <div class="product">
+                            </div>
+                            <div class="product">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer containing store hours, contact information, and social media links -->
+        <footer>
+            <nav class="nav-foot">
+                <div class="foot-start">
+                    <div class="contact">
+                        <a class="contact-label" href="">Contact Us</a>
+                        <a class="contact-subtext" href="">Having issues with your order? Have any questions?<br>Please reach out to us if so.</a>
+                    </div>
+                </div>
+                <div class="foot-center">
+                    <a class="hours-label">Store Hours</a>
+                    <a class="hours-subtext">Monday - Wednesday: 7:30 AM - 5:00 PM<br>Thursday: 7:30 AM - 6:00 PM<br>Friday: 7:30 AM - 11:30 AM</a>
+                </div>
+                <div class="foot-end">
+                    <a class="social-label">Follow Us</a>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com" class="social-icon"><img src="icons/facebook.png"></a>
+                        <a href="https://www.instagram.com" class="social-icon"><img src="icons/instagram.png"></a>
+                        <a href="https://www.tiktok.com" class="social-icon"><img src="icons/tiktok.png"></a>
+                    </div>
+                </div>
+            </nav>
+        </footer>
+    </body>
+</html>

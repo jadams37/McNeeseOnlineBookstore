@@ -1,0 +1,53 @@
+<!-- This page serves as the login/signup for the McNeese
+     Online Bookstore -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Metadata -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="Marketplace, Shopping, Store, Books, Bookstore"/>
+        <meta name="description" content="Online bookstore to buy textbooks and supplies."/>
+
+        <!-- Replace 'author' with your name -->
+        <meta name="author" content="Jordan Adams, CCS"/>
+
+        <!-- Change 'template' with your page title -->
+        <title>McNeese Bookstore: Signup</title>
+
+        <!-- Styling/Script Links -->
+        <link rel="stylesheet" href="css/login.css">
+        <script src="scripts/signup-next-form.js"></script>
+    </head>
+    <body>
+        <article>
+            <div class="page-content">
+                <div class="page-center">
+                    <div class="logo-content">
+                        <p class="logo-label">McNeese</p>
+                        <img src="icons/logo.png">
+                        <p class="logo-label">Bookstore</p>
+                    </div>
+                    <div class="signup-content">
+                        <p class="signup-label">Signup</p>
+                        <div class="signup-input">
+                            <form class="signup-form" action="" id="signup">
+                                <label for="email" class="email-label">Email</label><br>
+                                <input class="email-input" id="email" type="text" name="email"><br>
+                                <label for="username" class="username-label">Username</label><br>
+                                <input class="username-input" id="username" type="text" name="username"><br>
+                                <label for="password" class="password-label">Password</label><br>
+                                <input class="password-input" id="password" type="password" name="password"><br>
+                            </form>
+                            <button class="next-button" id="next" type="button" onclick="nextForm()">Next</button>
+                        </div>
+                        <div class="register-content">
+                            <p class="register-label">Already registered?</p>
+                            <a href="login.html" class="register">Login</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </body>
+</html>

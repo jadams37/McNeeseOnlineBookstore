@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Kaisei+Opti&family=Questrial&display=swap');
+
+:root {
+    --content-bg-color: #EBEBEB;
+    --sort-bg-color: #00529B;
+    --sort-value-color: #ffffff;
+    --button-color: #FFD203;
+    --button-highlight-color: #e6bd03;
+
+    --results-title-font-size: 26px;
+    --input-label-font-size: 24px;
+    --label-font-size: 20px;
+    --subtitle-font-size: 18px;
+    --subtext-font-size: 14px;
+}
+
+/* Logo Font */
+.hina-mincho-regular {
+  font-family: "Hina Mincho", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Content Title/Navbar Font */
+.kaisei-opti-regular {
+  font-family: "Kaisei Opti", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Subcontent Font */
+.questrial-regular {
+  font-family: "Questrial", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.page-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.results-container {
+    height: 710px;
+    width: 1124px;
+    display: flex;
+    flex-direction: column;
+}
+
+.results-top {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    align-items: center;
+    justify-content: center;
+}
+
+.results-title {
+    font-family: Kaisei Opti;
+    font-size: var(--results-title-font-size);
+    font-weight: bold;
+    margin-left: auto;
+}
+
+.sort-container {
+    border: 1px solid #000000;
+    border-radius: 4px;
+    margin-left: 20%;
+}
+
+.sort-label, .sort-drop {
+    font-family: Questrial;
+    font-size: var(--subtext-font-size);
+    font-weight: bold;
+}
+
+.sort-drop {
+    background-color: var(--sort-bg-color);
+    color: var(--sort-value-color);
+    border: none;
+}
+
+.results-bottom {
+    display: flex;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+}
+
+.filter-title {
+    font-family: Kaisei Opti;
+    font-size: var(--subtitle-font-size);
+    font-weight: bold;
+    margin-bottom: 0;
+    width: fit-content;
+    margin: auto;
+}
+
+.filter-separator {
+    width: 100%;
+    height: 2px;
+    background-color: #000000;
+}
+
+.filter-type {
+    font-family: Questrial;
+    font-size: var(--subtext-font-size);
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.filter-input-label {
+    font-family: Questrial;
+    font-size: var(--subtext-font-size);
+}
+
+.products-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto auto;
+    overflow: scroll;
+    gap: 12px;
+    height: 584px;
+    margin-left: 24px;
+}
+
+.product {
+    height: 280px;
+    width: 240px;
+    background-color: var(--content-bg-color);
+}
