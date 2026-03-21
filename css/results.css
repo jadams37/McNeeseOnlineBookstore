@@ -69,6 +69,11 @@
     margin-left: 20%;
 }
 
+.sort-form {
+    display: flex;
+    align-items: center;
+}
+
 .sort-label, .sort-drop {
     font-family: Questrial;
     font-size: var(--subtext-font-size);
@@ -79,6 +84,9 @@
     background-color: var(--sort-bg-color);
     color: var(--sort-value-color);
     border: none;
+    outline: 1px solid #000000;
+    border-radius: 0px 3px 3px 0px;
+    margin-left: 2px;
 }
 
 .results-bottom {
