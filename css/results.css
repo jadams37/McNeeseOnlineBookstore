@@ -147,6 +147,7 @@
     background-color: var(--content-bg-color);
     font-family: Questrial;
     font-size: var(--subtext-font-size);
+    transition: background-color 0.25s;
 }
 
 .product-container:hover {
