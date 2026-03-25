@@ -127,6 +127,7 @@ article {
 
 .errorMsg {
     margin: 0;
+    font-family: Questrial;
     color: red;
     text-align: center;
 }
