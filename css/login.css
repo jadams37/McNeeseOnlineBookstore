@@ -121,8 +121,14 @@ article {
     font-size: var(--subtext-font-size)
 }
 
-.username-input, .email-input, .name-input, .address-input {
+.username-container, .email-container, .name-input, .address-input {
     margin-bottom: 32px;
+}
+
+.errorMsg {
+    margin: 0;
+    color: red;
+    text-align: center;
 }
 
 .username-label, .password-label, .email-label, .name-label, .address-label, .phone-label {
