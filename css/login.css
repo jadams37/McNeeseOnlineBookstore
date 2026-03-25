@@ -121,7 +121,7 @@ article {
     font-size: var(--subtext-font-size)
 }
 
-.username-container, .email-container, .name-input, .address-input {
+.username-container, .email-container, .name-container, .address-container {
     margin-bottom: 32px;
 }
 
