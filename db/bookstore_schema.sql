@@ -7,11 +7,19 @@ CREATE TABLE IF NOT EXISTS users_account (
     password_hash TEXT NOT NULL,
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
+    physical_address TEXT,
+    phone_number TEXT,
     role TEXT NOT NULL DEFAULT 'student' CHECK (role IN ('student', 'admin', 'staff')),
     is_active BOOLEAN NOT NULL DEFAULT TRUE,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+ALTER TABLE users_account
+ADD COLUMN IF NOT EXISTS physical_address TEXT;
+
+ALTER TABLE users_account
+ADD COLUMN IF NOT EXISTS phone_number TEXT;
 
 CREATE TABLE IF NOT EXISTS category (
     category_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),

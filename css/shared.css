@@ -6,7 +6,7 @@
     --nav-logo-color: #FFD203;
     --nav-sep-color: #FFD203;
     --nav-label-color: #FFFFFF;
-    --nav-logo-font-size: 48px;
+    --nav-logo-font-size: 30px;
     --nav-label-font-size: 20px;
     --nav-subtext-font-size: 16px;
 
@@ -65,7 +65,7 @@ header, footer {
 .nav-start {
     display: flex;
     margin-left: 32px;
-    margin-bottom: 16px;
+    margin-bottom: 0;
 }
 
 /* Second Set of Nav Element(s) (Search Bar) */
@@ -91,11 +91,15 @@ header, footer {
     font-size: var(--nav-logo-font-size);
     color: var(--nav-logo-color);
     text-decoration: none;
+    white-space: nowrap;
+    line-height: 1;
+    position: relative;
+    top: -2px;
 }
 
 /* Search Container */
 .search {
-    width: 592px;
+    width: 440px;
     display: flex;
     align-items: center;
     padding: 4px;
@@ -169,7 +173,19 @@ header, footer {
 .profile {
     display: flex;
     align-items: center;
-    
+    gap: 10px;
+}
+
+.logout-link {
+    color: var(--nav-label-color);
+    font-family: Kaisei Opti;
+    font-size: var(--nav-subtext-font-size);
+    text-decoration: none;
+    transition: color 0.25s;
+}
+
+.logout-link:hover {
+    color: rgba(255, 255, 255, 0.25);
 }
 
 .profile-icon img {

@@ -17,6 +17,7 @@
 
         <!-- Styling/Script Links -->
         <link rel="stylesheet" href="css/login.css">
+        <script src="scripts/login.js" defer></script>
     </head>
     <body>
         <article>
@@ -32,14 +33,15 @@
                         <div class="login-input">
                             <form class="login-form" action="" id="login">
                                 <label for="username" class="username-label">Username/Email</label><br>
-                                <input class="username-input" id="username" type="text"><br>
+                                <input class="username-input" id="username" name="username" type="text" required><br>
                                 <label for="password" class="password-label">Password</label><br>
-                                <input class="password-input" id="password" type="password"><br>
+                                <input class="password-input" id="password" name="password" type="password" required><br>
                                 <input class="remember-input" id="remember" type="checkbox">
                                 <label for="remember" class="remember-label">Remember me</label>
                                 <a href="" class="forgot-pass-label">Forgot password?</a>
                             </form>
                             <button class="login-button" type="submit" value="login" form="login">Login</button>
+                            <p id="login-message"></p>
                         </div>
                         <div class="register-content">
                             <p class="register-label">New user?</p>
