@@ -58,22 +58,21 @@ function nextForm() {
     const newFormInput =
                    `<div class="name-container">
                         <label for="name" class="name-label">Full Name</label><br>
-                        <input class="name-input" id="name" type="text"><br>
+                        <input class="name-input" id="name" type="text" name="name"><br>
                         <p class="error-msg" id="error-name" hidden>Name must be of length 2 to 50.</p>
                     </div>
                     <div class="address-container">
                         <label for="address" class="address-label">Address</label><br>
-                        <input class="address-input" id="address" type="text"><br>
+                        <input class="address-input" id="address" type="text" name="address"><br>
                         <p class="error-msg" id="error-address" hidden>Address must be of length 5 to 100.</p>
                     </div>
                     <div class="phone-container">
                         <label for="phone" class="phone-label">Phone Number</label><br>
-                        <input class="phone-input" id="phone" type="tel"><br>
+                        <input class="phone-input" id="phone" type="tel" name="phone"><br>
                         <p class="error-msg" id="error-phone" hidden>Phone must be of format 111-111-1111.</p>
                     </div>`;
 
-    if(!onNextPage && isFormValid)
-    {
+    if(!onNextPage && isFormValid) {
         onNextPage = true;
 
         /* Iterates through each element contained in the signup form and 
@@ -87,6 +86,10 @@ function nextForm() {
 
         /* Update the 'Next' button to become a submit button */
         button.textContent = "Register";
-        button.type = "submit";
+    }
+
+    else if(onNextPage && isFormValid) {
+        /* Submit form if on second part of form and inputs are valid */
+        form.requestSubmit();
     }
 }
