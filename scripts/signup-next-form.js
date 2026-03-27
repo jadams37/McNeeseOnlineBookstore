@@ -55,7 +55,7 @@ function nextForm() {
     })
 
     /* New form input and labels to show on the next page of the Signup */
-    const newFormInput=
+    const newFormInput =
                    `<div class="name-container">
                         <label for="name" class="name-label">Full Name</label><br>
                         <input class="name-input" id="name" type="text"><br>
