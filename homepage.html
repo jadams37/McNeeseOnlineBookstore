@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Marketplace, Shopping, Store, Books, Bookstore, McNeese">
+  <meta name="description" content="Homepage for the McNeese Online Bookstore.">
+  <meta name="author" content="Luke Pickle, CCS">
+  <title>McNeese Bookstore: Home</title>
+
+  <link rel="stylesheet" href="css/shared.css">
+
+  <style>
+    :root {
+      --mcneese-blue: #00529B;
+      --mcneese-gold: #FFD203;
+      --light-blue: #eaf3fb;
+      --card-bg: #f5f7fa;
+      --text-dark: #1d2731;
+      --muted: #5d6873;
+      --border: #d9e2ec;
+      --shadow: 0 8px 22px rgba(0, 82, 155, 0.12);
+    }
+
+
+    .icon-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(255, 210, 3, 0.16);
+      color: var(--mcneese-gold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+      font-weight: bold;
+    }
+
+    .hero-side .icon-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.16);
+      color: var(--mcneese-gold);
+      font-size: 22px;
+    }
+
+    article {
+      margin-top: 32px;
+      margin-bottom: 48px;
+    }
+
+    .page-content {
+      width: min(1180px, 92vw);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 20px;
+      background: linear-gradient(135deg, #00529B 0%, #0a68bc 55%, #1c7ad0 100%);
+      border-radius: 24px;
+      padding: 34px;
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      font-family: "Kaisei Opti", serif;
+      font-size: 42px;
+      margin: 0 0 12px 0;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      font-family: "Questrial", sans-serif;
+      font-size: 18px;
+      line-height: 1.5;
+      margin: 0 0 22px 0;
+      max-width: 620px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-btn,
+    .outline-btn,
+    .mini-btn {
+      text-decoration: none;
+      font-family: "Questrial", sans-serif;
+      font-weight: bold;
+      border-radius: 999px;
+      transition: 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-btn {
+      background-color: var(--mcneese-gold);
+      color: #111;
+      padding: 13px 22px;
+    }
+
+    .outline-btn {
+      border: 2px solid rgba(255,255,255,0.75);
+      color: white;
+      padding: 11px 20px;
+    }
+
+    .hero-btn:hover,
+    .mini-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(0.97);
+    }
+
+    .outline-btn:hover {
+      background-color: rgba(255,255,255,0.12);
+    }
+
+    .hero-side {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .hero-side-title {
+      font-family: "Kaisei Opti", serif;
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .hero-side .quick-stat {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "Questrial", sans-serif;
+      font-size: 17px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .info-card,
+    .section-card,
+    .promo-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .info-card {
+      padding: 18px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .info-card h3,
+    .section-title,
+    .promo-title {
+      font-family: "Kaisei Opti", serif;
+      color: var(--text-dark);
+    }
+
+    .info-card h3 {
+      margin: 0 0 8px 0;
+      font-size: 22px;
+    }
+
+    .info-card p,
+    .section-subtitle,
+    .card-text,
+    .announcement-list li,
+    .category-text,
+    .price,
+    .old-price,
+    .tag,
+    .promo-card p {
+      font-family: "Questrial", sans-serif;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .section-card {
+      padding: 22px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .section-subtitle {
+      margin: 6px 0 0 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .mini-btn {
+      background: var(--mcneese-blue);
+      color: white;
+      padding: 10px 16px;
+      font-size: 14px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .category-card {
+      background: linear-gradient(180deg, #fdfefe 0%, var(--light-blue) 100%);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .category-card h3 {
+      font-family: "Kaisei Opti", serif;
+      margin: 10px 0 8px 0;
+      font-size: 20px;
+      color: var(--text-dark);
+    }
+
+    .category-text {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.4;
+      font-size: 15px;
+    }
+
+    .catalog-layout {
+      display: grid;
+      grid-template-columns: 270px 1fr;
+      gap: 18px;
+    }
+
+    .filter-box {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      background: #fbfcfe;
+      height: fit-content;
+    }
+
+    .filter-title {
+      font-family: "Kaisei Opti", serif;
+      font-size: 24px;
+      margin: 0 0 10px 0;
+    }
+
+    .filter-group {
+      margin-top: 16px;
+    }
+
+    .filter-group h4 {
+      font-family: "Questrial", sans-serif;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+      margin: 0 0 10px 0;
+      text-transform: uppercase;
+    }
+
+    .filter-group label,
+    .sort-bar label,
+    .sort-bar select {
+      font-family: "Questrial", sans-serif;
+      font-size: 15px;
+      color: var(--text-dark);
+    }
+
+    .filter-group label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .sort-bar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .sort-bar select {
+      border: none;
+      background: var(--mcneese-blue);
+      color: white;
+      padding: 9px 12px;
+      border-radius: 8px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .product-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: white;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-image {
+      height: 160px;
+      background: linear-gradient(135deg, #dcecff 0%, #fef3bc 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Kaisei Opti", serif;
+      font-size: 24px;
+      color: var(--mcneese-blue);
+    }
+
+    .product-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .tag {
+      width: fit-content;
+      font-size: 12px;
+      font-weight: bold;
+      background: #eef6ff;
+      color: var(--mcneese-blue);
+      padding: 5px 9px;
+      border-radius: 999px;
+    }
+
+    .product-name {
+      font-family: "Kaisei Opti", serif;
+      font-size: 19px;
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    .card-text {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .price {
+      color: var(--mcneese-blue);
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .old-price {
+      color: #8f9aa5;
+      text-decoration: line-through;
+      font-size: 14px;
+    }
+
+    .promo-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+    }
+
+    .promo-card {
+      padding: 22px;
+    }
+
+    .promo-title {
+      margin: 0 0 10px 0;
+      font-size: 26px;
+    }
+
+    .promo-card p {
+      color: var(--muted);
+      margin: 0 0 14px 0;
+      line-height: 1.5;
+    }
+
+    .announcement-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .announcement-list li {
+      margin-bottom: 10px;
+      color: var(--text-dark);
+      line-height: 1.45;
+    }
+
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .quick-link {
+      text-decoration: none;
+      color: var(--text-dark);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      background: white;
+      text-align: center;
+      font-family: "Kaisei Opti", serif;
+      transition: 0.2s ease;
+    }
+
+    .quick-link:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .promo-grid,
+      .catalog-layout,
+      .info-grid,
+      .category-grid,
+      .quick-links,
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .search {
+        width: 100%;
+      }
+
+      .nav-head {
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 14px 0;
+      }
+
+      .nav-start,
+      .nav-center,
+      .nav-end {
+        margin: 0;
+      }
+
+      .foot-start,
+      .foot-end {
+        margin: 0;
+      }
+
+      .nav-foot {
+        flex-direction: column;
+        gap: 16px;
+        padding: 18px;
+      }
+
+      header,
+      footer {
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav-head">
+      <div class="nav-start">
+        <div class="logo">
+          <a class="logo-label" href="homepage.html">McNeese Bookstore</a>
+        </div>
+      </div>
+
+      <div class="nav-center">
+        <form action="results.html">
+          <div class="search">
+            <span class="search-icon">🔎</span>
+            <input class="search-input" type="search" name="q" placeholder="Search textbooks, supplies, and merch">
+          </div>
+        </form>
+      </div>
+
+      <div class="nav-end">
+        <div class="cart">
+          <a href="#featured" class="cart-label">Featured</a>
+          <a href="#featured" class="cart-icon"><img src="icons/cart.svg" alt="Featured"></a>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="profile">
+          <a href="login.html" class="profile-label">Login</a>
+          <a href="login.html" class="profile-icon"><img src="icons/profile.svg" alt="Login"></a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <article>
+    <div class="page-content">
+      <section class="hero">
+        <div>
+          <h1>Your campus essentials, all in one place.</h1>
+          <p>Shop textbooks, school supplies, McNeese gear, and classroom must-haves with a layout that fits the rest of your bookstore project. This homepage uses the same navigation, search, profile, cart, footer, filters, and product-style elements already present in the repository.</p>
+          <div class="hero-actions">
+            <a class="hero-btn" href="#featured">Shop Featured Items</a>
+            <a class="outline-btn" href="#catalog">Browse Categories</a>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <h2 class="hero-side-title">Why students use the store</h2>
+          <div class="quick-stat"><span class="icon-badge">📘</span> Textbooks and class materials</div>
+          <div class="quick-stat"><span class="icon-badge">🛍</span> Supplies, tech, and merch</div>
+          <div class="quick-stat"><span class="icon-badge">🚚</span> Pickup and shipping options</div>
+          <div class="quick-stat"><span class="icon-badge">🎓</span> Built for McNeese students</div>
+        </div>
+      </section>
+
+      <section class="info-grid">
+        <div class="info-card">
+          <span class="icon-badge">📘</span>
+          <div>
+            <h3>Course Materials</h3>
+            <p>Find textbooks, lab manuals, workbooks, and course packets for the semester.</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="icon-badge">★</span>
+          <div>
+            <h3>Best Sellers</h3>
+            <p>See the most popular items students are buying right now for class and campus life.</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="icon-badge">🚚</span>
+          <div>
+            <h3>Fast Fulfillment</h3>
+            <p>Choose easy local pickup or delivery for the items you need before class starts.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card" id="catalog">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Browse Store Categories</h2>
+            <p class="section-subtitle">A homepage section built around the bookstore theme while still matching the existing project style.</p>
+          </div>
+          <a class="mini-btn" href="results.html">Open Results Page</a>
+        </div>
+
+        <div class="category-grid">
+          <div class="category-card">
+            <span class="icon-badge" style="margin:0 auto; background:#e8f1fb; color:#00529B;">📘</span>
+            <h3>Textbooks</h3>
+            <p class="category-text">Required books, used copies, and study editions for core classes.</p>
+          </div>
+          <div class="category-card">
+            <span class="icon-badge" style="margin:0 auto; background:#e8f1fb; color:#00529B;">🎓</span>
+            <h3>School Supplies</h3>
+            <p class="category-text">Notebooks, folders, pens, calculators, and other classroom basics.</p>
+          </div>
+          <div class="category-card">
+            <span class="icon-badge" style="margin:0 auto; background:#e8f1fb; color:#00529B;">🛍</span>
+            <h3>Campus Merch</h3>
+            <p class="category-text">Hoodies, tees, gifts, and school spirit items for students and alumni.</p>
+          </div>
+          <div class="category-card">
+            <span class="icon-badge" style="margin:0 auto; background:#e8f1fb; color:#00529B;">★</span>
+            <h3>Featured Deals</h3>
+            <p class="category-text">Specials and highlighted products to draw attention on the homepage.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card" id="featured">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Featured Products</h2>
+            <p class="section-subtitle">This section reuses the results-page idea with filters, sorting, and product cards in a homepage-friendly layout.</p>
+          </div>
+        </div>
+
+        <div class="catalog-layout">
+          <aside class="filter-box">
+            <h3 class="filter-title">Filter</h3>
+
+            <div class="filter-group">
+              <h4>Product Type</h4>
+              <label><input type="checkbox"> Books</label>
+              <label><input type="checkbox"> Supplies</label>
+              <label><input type="checkbox"> Merch</label>
+            </div>
+
+            <div class="filter-group">
+              <h4>Condition</h4>
+              <label><input type="checkbox"> New</label>
+              <label><input type="checkbox"> Used</label>
+            </div>
+
+            <div class="filter-group">
+              <h4>Availability</h4>
+              <label><input type="checkbox"> In Stock</label>
+              <label><input type="checkbox"> Pickup Today</label>
+            </div>
+          </aside>
+
+          <div>
+            <div class="sort-bar">
+              <label for="sort">Sort By</label>
+              <select id="sort">
+                <option>Featured</option>
+                <option>Ascending Order</option>
+                <option>Descending Order</option>
+                <option>Low to High Price</option>
+                <option>High to Low Price</option>
+              </select>
+            </div>
+
+            <div class="product-grid">
+              <div class="product-card">
+                <div class="product-image">CSCI 309</div>
+                <div class="product-body">
+                  <span class="tag">Best Seller</span>
+                  <h3 class="product-name">Database Systems Textbook</h3>
+                  <p class="card-text">Popular course material for students taking database and information systems classes.</p>
+                  <div class="price-row"><span class="price">$84.99</span><span class="old-price">$99.99</span></div>
+                  <a class="mini-btn" href="results.html">View Item</a>
+                </div>
+              </div>
+
+              <div class="product-card">
+                <div class="product-image">Starter Kit</div>
+                <div class="product-body">
+                  <span class="tag">Supplies</span>
+                  <h3 class="product-name">Semester Supply Bundle</h3>
+                  <p class="card-text">Notebook, folder set, highlighters, pens, and index cards for a clean start.</p>
+                  <div class="price-row"><span class="price">$24.50</span></div>
+                  <a class="mini-btn" href="results.html">View Item</a>
+                </div>
+              </div>
+
+              <div class="product-card">
+                <div class="product-image">McNeese</div>
+                <div class="product-body">
+                  <span class="tag">Campus Gear</span>
+                  <h3 class="product-name">McNeese Spirit Hoodie</h3>
+                  <p class="card-text">A simple merchandise card to give the homepage more variety and store feel.</p>
+                  <div class="price-row"><span class="price">$42.00</span></div>
+                  <a class="mini-btn" href="results.html">View Item</a>
+                </div>
+              </div>
+
+              <div class="product-card">
+                <div class="product-image">Lab Ready</div>
+                <div class="product-body">
+                  <span class="tag">Used Copy</span>
+                  <h3 class="product-name">Engineering Lab Manual</h3>
+                  <p class="card-text">A sample featured listing that helps fill out the storefront and product grid.</p>
+                  <div class="price-row"><span class="price">$31.75</span><span class="old-price">$44.00</span></div>
+                  <a class="mini-btn" href="results.html">View Item</a>
+                </div>
+              </div>
+
+              <div class="product-card">
+                <div class="product-image">Graphing</div>
+                <div class="product-body">
+                  <span class="tag">Tech</span>
+                  <h3 class="product-name">Graphing Calculator</h3>
+                  <p class="card-text">Fits math and science classes while adding a tech item to the homepage.</p>
+                  <div class="price-row"><span class="price">$119.99</span></div>
+                  <a class="mini-btn" href="results.html">View Item</a>
+                </div>
+              </div>
+
+              <div class="product-card">
+                <div class="product-image">Study Pack</div>
+                <div class="product-body">
+                  <span class="tag">New Arrival</span>
+                  <h3 class="product-name">Exam Prep Bundle</h3>
+                  <p class="card-text">Flash cards, sticky notes, and review sheets grouped into one quick purchase.</p>
+                  <div class="price-row"><span class="price">$16.95</span></div>
+                  <a class="mini-btn" href="results.html">View Item</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="promo-grid">
+        <div class="promo-card">
+          <h2 class="promo-title">Announcements</h2>
+          <ul class="announcement-list">
+            <li>Spring semester textbooks are now available for browsing and purchase.</li>
+            <li>Online orders can be prepared for campus pickup during normal bookstore hours.</li>
+            <li>Used book availability may vary depending on current stock.</li>
+            <li>Featured merchandise and supplies can be promoted here on the homepage.</li>
+          </ul>
+        </div>
+
+        <div class="promo-card">
+          <h2 class="promo-title">Need help finding something?</h2>
+          <p>Use the search bar at the top, head to the results page, or log in to manage your account. This block works well as a callout area for student notices, order updates, or semester reminders.</p>
+          <a class="hero-btn" href="login.html">Go to Login</a>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Quick Links</h2>
+            <p class="section-subtitle">Extra homepage navigation for common actions.</p>
+          </div>
+        </div>
+
+        <div class="quick-links">
+          <a class="quick-link" href="results.html">Shop Books</a>
+          <a class="quick-link" href="results.html">School Supplies</a>
+          <a class="quick-link" href="login.html">Student Login</a>
+          <a class="quick-link" href="#featured">Featured Deals</a>
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <footer>
+    <nav class="nav-foot">
+      <div class="foot-start">
+        <div class="contact">
+          <a class="contact-label" href="">Contact Us</a>
+          <a class="contact-subtext" href="">Having issues with your order? Have any questions?<br>Please reach out to us if so.</a>
+        </div>
+      </div>
+
+      <div class="foot-center">
+        <a class="hours-label">Store Hours</a>
+        <a class="hours-subtext">Monday - Wednesday: 7:30 AM - 5:00 PM<br>Thursday: 7:30 AM - 6:00 PM<br>Friday: 7:30 AM - 11:30 AM</a>
+      </div>
+
+      <div class="foot-end">
+        <a class="social-label">Follow Us</a>
+        <div class="social-links">
+          <a href="https://www.facebook.com" class="social-icon"><img src="icons/facebook.png" alt="Facebook"></a>
+          <a href="https://www.instagram.com" class="social-icon"><img src="icons/instagram.png" alt="Instagram"></a>
+          <a href="https://www.tiktok.com" class="social-icon"><img src="icons/tiktok.png" alt="TikTok"></a>
+        </div>
+      </div>
+    </nav>
+  </footer>
+</body>
+</html>
