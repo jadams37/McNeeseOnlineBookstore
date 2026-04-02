@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <script src="scripts/auth-nav.js" defer></script>
+    <script src="scripts/cart.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <div class="nav-head">
+            <div class="nav-start">
+                <div class="logo">
+                    <a href="homepage.html" class="logo-label">McNeese Bookstore</a>
+                </div>
+            </div>
+
+            <div class="nav-center">
+                <div class="search">
+                    <span class="search-icon">⌕</span>
+                    <input class="search-input" type="text" placeholder="Search books, rentals, apparel...">
+                </div>
+            </div>
+
+            <div class="nav-end">
+                <div class="cart">
+                    <div class="cart-icon">
+                        <img src="icons/cart.svg" alt="Cart">
+                    </div>
+                    <a href="cart.html" class="cart-label">Cart</a>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="profile">
+                    <div class="profile-icon">
+                        <img src="icons/profile.svg" alt="Profile">
+                    </div>
+                    <a href="#" class="profile-label">Profile</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="cart-page">
+        <section class="page-title">
+            <h1>Shopping Cart</h1>
+            <p>Review your items and proceed to checkout.</p>
+        </section>
+
+        <section class="cart-content">
+            <div id="cart-items" class="cart-items">
+                <!-- Cart items will be loaded here -->
+            </div>
+
+            <div id="cart-summary" class="cart-summary">
+                <!-- Cart summary will be loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="nav-foot">
+            <div class="foot-start">
+                <div class="contact">
+                    <a href="#" class="contact-label">Contact Us</a>
+                    <span class="contact-subtext">support@campusstore.edu</span>
+                </div>
+            </div>
+
+            <div class="foot-center">
+                <span class="hours-label">Store Hours</span>
+                <span class="hours-subtext">Mon - Fri: 8 AM - 5 PM</span>
+            </div>
+
+            <div class="foot-end">
+                <span class="social-label">Follow Us</span>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><img src="images/facebook.png" alt="Facebook"></a>
+                    <a href="#" class="social-icon"><img src="images/instagram.png" alt="Instagram"></a>
+                    <a href="#" class="social-icon"><img src="images/twitter.png" alt="Twitter"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

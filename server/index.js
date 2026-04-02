@@ -166,6 +166,8 @@ app.post('/auth/login', async (req, res) => {
 
         const token = createAuthToken(user);
 
+        console.log('Login successful for user:', user.user_id);
+
         return res.status(200).json({
             message: 'Login successful.',
             token,
@@ -346,6 +348,165 @@ app.put('/profile/me', requireAuth, async (req, res) => {
     } catch (error) {
         console.error('Profile update error:', error);
         return res.status(500).json({ message: 'Unable to update profile right now.' });
+    }
+});
+
+const getOrCreateCart = async (userId) => {
+    let result = await pool.query('SELECT cart_id FROM cart WHERE user_id = $1', [userId]);
+    if (result.rowCount > 0) {
+        return result.rows[0].cart_id;
+    }
+    result = await pool.query('INSERT INTO cart (user_id) VALUES ($1) RETURNING cart_id', [userId]);
+    return result.rows[0].cart_id;
+};
+
+app.get('/cart', requireAuth, async (req, res) => {
+    const userId = req.user.userId;
+
+    try {
+        const cartId = await getOrCreateCart(userId);
+        const result = await pool.query(
+            `SELECT
+                ci.cart_item_id,
+                ci.quantity,
+                p.product_id,
+                p.title,
+                p.author,
+                p.price,
+                p.quantity_in_stock,
+                (ci.quantity * p.price) AS line_total
+             FROM cart_item ci
+             JOIN product p ON p.product_id = ci.product_id
+             WHERE ci.cart_id = $1
+             ORDER BY ci.cart_item_id`,
+            [cartId]
+        );
+
+        const items = result.rows;
+        const subtotal = items.reduce((sum, item) => sum + Number(item.line_total), 0);
+        const taxRate = 0.0825; // Example tax rate
+        const taxAmount = subtotal * taxRate;
+        const total = subtotal + taxAmount;
+
+        return res.status(200).json({
+            cart: {
+                items,
+                subtotal: subtotal.toFixed(2),
+                tax_amount: taxAmount.toFixed(2),
+                total: total.toFixed(2)
+            }
+        });
+    } catch (error) {
+        console.error('Cart view error:', error);
+        return res.status(500).json({ message: 'Unable to load cart right now.' });
+    }
+});
+
+app.post('/cart/items', requireAuth, async (req, res) => {
+    const userId = req.user.userId;
+    const { productId, quantity } = req.body;
+
+    if (!userId) {
+        return res.status(401).json({ message: 'Invalid user session. Please log in again.' });
+    }
+
+    console.log('Add to cart:', { userId, productId, quantity });
+
+    if (!productId || !quantity || quantity <= 0) {
+        return res.status(400).json({ message: 'Product ID and positive quantity required.' });
+    }
+
+    try {
+        const cartId = await getOrCreateCart(userId);
+
+        console.log('Cart ID:', cartId);
+
+        // Check if item already in cart
+        let result = await pool.query(
+            'SELECT cart_item_id, quantity FROM cart_item WHERE cart_id = $1 AND product_id = $2',
+            [cartId, productId]
+        );
+
+        if (result.rowCount > 0) {
+            // Update quantity
+            const newQuantity = result.rows[0].quantity + quantity;
+            await pool.query(
+                'UPDATE cart_item SET quantity = $1 WHERE cart_item_id = $2',
+                [newQuantity, result.rows[0].cart_item_id]
+            );
+        } else {
+            // Insert new item
+            await pool.query(
+                'INSERT INTO cart_item (cart_id, product_id, quantity) VALUES ($1, $2, $3)',
+                [cartId, productId, quantity]
+            );
+        }
+
+        return res.status(201).json({ message: 'Item added to cart.' });
+    } catch (error) {
+        console.error('Add to cart error:', error);
+        return res.status(500).json({ message: `Unable to add item to cart right now: ${error.message}` });
+    }
+});
+
+app.put('/cart/items/:itemId', requireAuth, async (req, res) => {
+    const userId = req.user.userId;
+    const { itemId } = req.params;
+    const { quantity } = req.body;
+
+    if (!quantity || quantity < 0) {
+        return res.status(400).json({ message: 'Valid quantity required.' });
+    }
+
+    try {
+        const cartId = await getOrCreateCart(userId);
+
+        if (quantity === 0) {
+            // Remove item
+            const result = await pool.query(
+                'DELETE FROM cart_item WHERE cart_item_id = $1 AND cart_id = $2',
+                [itemId, cartId]
+            );
+            if (result.rowCount === 0) {
+                return res.status(404).json({ message: 'Cart item not found.' });
+            }
+            return res.status(200).json({ message: 'Item removed from cart.' });
+        } else {
+            // Update quantity
+            const result = await pool.query(
+                'UPDATE cart_item SET quantity = $1 WHERE cart_item_id = $2 AND cart_id = $3',
+                [quantity, itemId, cartId]
+            );
+            if (result.rowCount === 0) {
+                return res.status(404).json({ message: 'Cart item not found.' });
+            }
+            return res.status(200).json({ message: 'Cart item updated.' });
+        }
+    } catch (error) {
+        console.error('Update cart item error:', error);
+        return res.status(500).json({ message: 'Unable to update cart item right now.' });
+    }
+});
+
+app.delete('/cart/items/:itemId', requireAuth, async (req, res) => {
+    const userId = req.user.userId;
+    const { itemId } = req.params;
+
+    try {
+        const cartId = await getOrCreateCart(userId);
+        const result = await pool.query(
+            'DELETE FROM cart_item WHERE cart_item_id = $1 AND cart_id = $2',
+            [itemId, cartId]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ message: 'Cart item not found.' });
+        }
+
+        return res.status(200).json({ message: 'Item removed from cart.' });
+    } catch (error) {
+        console.error('Remove cart item error:', error);
+        return res.status(500).json({ message: 'Unable to remove item from cart right now.' });
     }
 });
 

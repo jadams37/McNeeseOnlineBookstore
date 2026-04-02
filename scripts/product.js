@@ -45,9 +45,46 @@ window.addEventListener('DOMContentLoaded', async () => {
                 <p class="description">Edition: ${product.edition || 'N/A'}</p>
                 <p class="description">ISBN: ${product.isbn || 'N/A'}</p>
                 <p class="description">Status: ${stockText}</p>
-                <button disabled>Add to Cart (Next Step)</button>
+                <button id="add-to-cart-btn" ${Number(product.quantity_in_stock) > 0 ? '' : 'disabled'}>Add to Cart</button>
             </div>
         `;
+
+        // Add event listener for add to cart
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
+        if (addToCartBtn && !addToCartBtn.disabled) {
+            addToCartBtn.addEventListener('click', async () => {
+                const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert('Please log in to add items to cart.');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/cart/items', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({
+                            productId: product.product_id,
+                            quantity: 1
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(data.message || 'Unable to add to cart.');
+                    }
+
+                    alert('Item added to cart!');
+                } catch (error) {
+                    alert(error.message || 'Unable to add to cart right now.');
+                }
+            });
+        }
 
         const relatedParams = new URLSearchParams();
         if (product.category_name) {
