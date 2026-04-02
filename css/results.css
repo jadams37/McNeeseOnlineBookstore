@@ -133,4 +133,49 @@
     height: 280px;
     width: 240px;
     background-color: var(--content-bg-color);
+    box-sizing: border-box;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-title {
+    font-family: Kaisei Opti;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+}
+
+.product-detail {
+    font-family: Questrial;
+    font-size: var(--subtext-font-size);
+    margin: 0;
+    color: #333333;
+    line-height: 1.4;
+}
+
+.product-price {
+    margin-top: auto;
+    margin-bottom: 8px;
+    font-family: Kaisei Opti;
+    font-size: 20px;
+    font-weight: bold;
+    color: #00529B;
+}
+
+.product-link {
+    display: inline-block;
+    width: fit-content;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: var(--button-color);
+    color: #000000;
+    font-family: Questrial;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.product-link:hover {
+    background-color: var(--button-highlight-color);
 }

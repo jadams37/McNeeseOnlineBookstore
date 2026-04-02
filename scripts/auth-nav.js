@@ -45,13 +45,31 @@ window.addEventListener('DOMContentLoaded', async () => {
     };
 
     const token = localStorage.getItem('authToken');
+
+    const setDestination = (target, href) => {
+        if (!target) {
+            return;
+        }
+
+        if (target.tagName === 'A') {
+            target.setAttribute('href', href);
+            target.removeAttribute('role');
+            target.style.cursor = '';
+            target.onclick = null;
+            return;
+        }
+
+        target.setAttribute('role', 'button');
+        target.style.cursor = 'pointer';
+        target.onclick = () => {
+            window.location.href = href;
+        };
+    };
+
     const fallbackToGuest = () => {
         profileLabel.textContent = 'Profile';
-        profileLabel.setAttribute('href', 'login.html');
-
-        if (profileIcon) {
-            profileIcon.setAttribute('href', 'login.html');
-        }
+        setDestination(profileLabel, 'login.html');
+        setDestination(profileIcon, 'login.html');
 
         removeLogoutLink();
     };
@@ -81,11 +99,8 @@ window.addEventListener('DOMContentLoaded', async () => {
         }
 
         profileLabel.textContent = username;
-        profileLabel.setAttribute('href', 'results.html');
-
-        if (profileIcon) {
-            profileIcon.setAttribute('href', 'results.html');
-        }
+        setDestination(profileLabel, 'Profile.html');
+        setDestination(profileIcon, 'Profile.html');
 
         ensureLogoutLink();
     } catch (_error) {

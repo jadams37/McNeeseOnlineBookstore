@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
 
-    <link rel="stylesheet" href="Profile.css">
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/Profile.css">
+    <script src="scripts/profile.js" defer></script>
+    <script src="scripts/auth-nav.js" defer></script>
 </head>
 <body>
 
@@ -14,7 +17,7 @@
         <div class="nav-head">
             <div class="nav-start">
                 <div class="logo">
-                    <a href="index.html" class="logo-label">McNeese BookStore</a>
+                    <a href="homepage.html" class="logo-label">McNeese BookStore</a>
                 </div>
             </div>
 
@@ -28,12 +31,12 @@
 
                 <div class="cart">
                         <a href="" class="cart-label">Cart</a>
-                        <a href="" class="cart-icon"><img src="cart.svg"></a>
+                        <a href="" class="cart-icon"><img src="icons/cart.svg" alt="Cart"></a>
                     </div>
                     <div class="separator"></div>
                     <div class="profile">
                         <a href="" class="profile-label">Profile</a>
-                        <a href="" class="profile-icon"><img src="profile.svg"></a>
+                        <a href="" class="profile-icon"><img src="icons/profile.svg" alt="Profile"></a>
                     </div>               
             </div>
         </div>
@@ -66,35 +69,36 @@
                     <div class="info-row">
                         <div class="info-group">
                             <label>First Name</label>
-                            <input type="text" value="Evan">
+                            <input id="first-name" type="text" value="Evan">
                         </div>
 
                         <div class="info-group">
                             <label>Last Name</label>
-                            <input type="text" value="Robertson">
+                            <input id="last-name" type="text" value="Robertson">
                         </div>
                     </div>
 
                     <div class="info-row">
                         <div class="info-group">
                             <label>Email</label>
-                            <input type="email" value="erobertson2@mcneese.edu">
+                            <input id="email" type="email" value="erobertson2@mcneese.edu" readonly>
                         </div>
 
                         <div class="info-group">
                             <label>Phone</label>
-                            <input type="text" value="(337) 607-9179">
+                            <input id="phone-number" type="text" value="(337) 607-9179">
                         </div>
                     </div>
 
                     <div class="info-row single-row">
                         <div class="info-group full-width">
                             <label>Address</label>
-                            <input type="text" value="123 College Street, Lake Charles, LA">
+                            <input id="physical-address" type="text" value="123 College Street, Lake Charles, LA">
                         </div>
                     </div>
 
-                    <button class="save-button">Save Changes</button>
+                    <button id="save-profile" class="save-button">Save Changes</button>
+                    <p id="profile-message" class="profile-message"></p>
                 </div>
 
                 <div class="info-box">

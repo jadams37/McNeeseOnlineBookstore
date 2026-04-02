@@ -1,0 +1,472 @@
+@import url('https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Kaisei+Opti&family=Questrial&display=swap');
+
+/* Variables */
+:root {
+    --nav-bg-color: #00529B;
+    --nav-logo-color: #FFD203;
+    --nav-sep-color: #FFD203;
+    --nav-label-color: #FFFFFF;
+    --nav-logo-font-size: 48px;
+    --nav-label-font-size: 20px;
+    --nav-subtext-font-size: 16px;
+
+    --page-bg-color: #FFFFFF;
+    --section-bg-color: #F7F9FC;
+    --card-bg-color: #FFFFFF;
+    --card-border-color: #D9E2EC;
+    --text-dark: #1F2933;
+    --text-light: #52606D;
+    --accent-color: #FFD203;
+    --button-blue: #00529B;
+    --button-blue-hover: #003f77;
+}
+
+/* Font Utility Classes */
+.hina-mincho-regular {
+    font-family: "Hina Mincho", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.kaisei-opti-regular {
+    font-family: "Kaisei Opti", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.questrial-regular {
+    font-family: "Questrial", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+html {
+    background-color: var(--page-bg-color);
+}
+
+body {
+    margin: 0;
+    background-color: var(--page-bg-color);
+}
+
+/* =========================
+   HEADER STYLES MATCHING SHARED CSS
+   ========================= */
+header {
+    display: flex;
+    background-color: var(--nav-bg-color);
+    align-items: center;
+    height: 65px;
+}
+
+.nav-head {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.nav-start {
+    display: flex;
+    margin-left: 32px;
+    margin-bottom: 16px;
+}
+
+.nav-center {
+    display: flex;
+    margin-left: auto;
+}
+
+.nav-end {
+    display: flex;
+    margin-left: auto;
+    margin-right: 32px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-label {
+    font-family: "Hina Mincho", sans-serif;
+    font-size: var(--nav-logo-font-size);
+    color: var(--nav-logo-color);
+    text-decoration: none;
+}
+
+.search {
+    width: 592px;
+    display: flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background-color: #f6f6f6;
+    transition: box-shadow 0.25s;
+}
+
+.search:focus-within .search-icon {
+    color: rgba(0, 0, 0, 0.75);
+}
+
+.search-input {
+    font-size: 16px;
+    font-family: "Questrial", sans-serif;
+    color: #333333;
+    margin-left: 14px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+}
+
+.search-input::placeholder {
+    color: rgba(0, 0, 0, 0.25);
+}
+
+.search-icon {
+    color: rgba(0, 0, 0, 0.25);
+    transition: color 0.25s;
+}
+
+.cart,
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.cart-icon img,
+.profile-icon img {
+    height: 48px;
+    width: 48px;
+    transition: opacity 0.25s;
+}
+
+.cart-label,
+.profile-label {
+    color: var(--nav-label-color);
+    font-family: "Kaisei Opti", sans-serif;
+    font-size: var(--nav-label-font-size);
+    text-decoration: none;
+    transition: color 0.25s;
+}
+
+.cart:hover .cart-label,
+.profile:hover .profile-label {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.cart:hover .cart-icon img,
+.profile:hover .profile-icon img {
+    opacity: 0.25;
+}
+
+.separator {
+    width: 3px;
+    height: 48px;
+    border-radius: 3px;
+    background-color: var(--nav-sep-color);
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+/* =========================
+   PRODUCT PAGE
+   ========================= */
+.product-page {
+    width: 90%;
+    max-width: 1350px;
+    margin: 50px auto 70px auto;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-title h1 {
+    font-family: "Kaisei Opti", sans-serif;
+    font-size: 40px;
+    color: var(--nav-bg-color);
+    margin-bottom: 10px;
+}
+
+.page-title p {
+    font-family: "Questrial", sans-serif;
+    font-size: 18px;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.product-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.product-section {
+    background-color: var(--section-bg-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 16px;
+    padding: 28px;
+}
+
+.product-section h2 {
+    font-family: "Kaisei Opti", sans-serif;
+    font-size: 28px;
+    color: var(--nav-bg-color);
+    margin-top: 0;
+    margin-bottom: 22px;
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.product-card {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 4px 12px rgba(0, 82, 155, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0, 82, 155, 0.12);
+}
+
+.product-image {
+    width: 100%;
+    height: 180px;
+    border-radius: 10px;
+    background-color: #E9EEF5;
+    border: 1px solid #D2DCE8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Questrial", sans-serif;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.product-card h3 {
+    font-family: "Kaisei Opti", sans-serif;
+    font-size: 20px;
+    color: var(--text-dark);
+    margin: 0 0 8px 0;
+}
+
+.price {
+    font-family: "Questrial", sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--nav-bg-color);
+    margin-bottom: 10px;
+}
+
+.description {
+    font-family: "Questrial", sans-serif;
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.5;
+    margin-bottom: 16px;
+    min-height: 68px;
+}
+
+.product-card button {
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--button-blue);
+    color: white;
+    font-family: "Kaisei Opti", sans-serif;
+    font-size: 16px;
+    padding: 11px 14px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+}
+
+.product-card button:hover {
+    background-color: var(--button-blue-hover);
+}
+
+/* =========================
+   BOTTOM CATEGORY BUTTONS
+   ========================= */
+.bottom-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 40px;
+}
+
+.bottom-buttons button {
+    background-color: white;
+    color: var(--nav-bg-color);
+    border: 2px solid var(--nav-bg-color);
+    border-radius: 30px;
+    padding: 12px 24px;
+    font-family: "Kaisei Opti", sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.bottom-buttons button:hover {
+    background-color: var(--nav-bg-color);
+    color: white;
+}
+
+/* =========================
+   FOOTER MATCHING SHARED CSS
+   ========================= */
+footer {
+    display: flex;
+    background-color: var(--nav-bg-color);
+    align-items: center;
+    height: 157px;
+    margin-top: 70px;
+}
+
+.nav-foot {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.contact,
+.foot-center,
+.foot-end {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.foot-start {
+    margin-left: 256px;
+}
+
+.contact:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--nav-label-color);
+}
+
+.contact-label,
+.hours-label,
+.social-label {
+    font-family: "Kaisei Opti", sans-serif;
+    font-size: var(--nav-label-font-size);
+    text-decoration: none;
+    color: var(--nav-label-color);
+}
+
+.contact-subtext,
+.hours-subtext {
+    font-family: "Questrial", sans-serif;
+    font-size: var(--nav-subtext-font-size);
+    text-decoration: none;
+    color: var(--nav-label-color);
+}
+
+.foot-center {
+    margin-left: auto;
+}
+
+.social-links {
+    display: flex;
+}
+
+.social-icon img {
+    height: 48px;
+    width: 48px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.social-icon img:hover {
+    outline: var(--nav-label-color) solid 1px;
+}
+
+.foot-end {
+    margin-left: auto;
+    margin-right: 256px;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 1200px) {
+    .search {
+        width: 400px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .foot-start {
+        margin-left: 80px;
+    }
+
+    .foot-end {
+        margin-right: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        height: auto;
+        padding: 12px 0;
+    }
+
+    .nav-head {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .nav-start,
+    .nav-center,
+    .nav-end {
+        margin: 0;
+    }
+
+    .search {
+        width: 90%;
+    }
+
+    .page-title h1 {
+        font-size: 30px;
+    }
+
+    .page-title p {
+        font-size: 16px;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    footer {
+        height: auto;
+        padding: 25px 0;
+    }
+
+    .nav-foot {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .foot-start,
+    .foot-center,
+    .foot-end {
+        margin: 0;
+    }
+}
