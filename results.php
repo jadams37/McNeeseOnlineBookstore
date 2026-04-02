@@ -14,7 +14,6 @@ else:
     $sql = "SELECT * FROM product
             WHERE title ILIKE :search
             OR isbn ILIKE :search
-            OR title ILIKE :search
             OR author ILIKE :search
             OR publisher ILIKE :search";
 
