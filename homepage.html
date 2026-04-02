@@ -1,144 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Homepage</title>
-
-    <!-- REQUIRED CSS -->
-    <link rel="stylesheet" href="css/shared.css">
-    <link rel="stylesheet" href="css/results.css">
-    <link rel="stylesheet" href="homepage_patch.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>McNeese Bookstore | Home</title>
+    <link rel="stylesheet" href="css/shared.css" />
+    <link rel="stylesheet" href="css/results.css" />
+    <link rel="stylesheet" href="homepage_patch.css" />
 </head>
-
 <body>
+    <header>
+        <div class="nav-head">
+            <div class="nav-start">
+                <a class="logo" href="homepage.html">
+                    <span class="logo-label">McNeese Bookstore</span>
+                </a>
+            </div>
 
-<!-- ================= HEADER (EXACT STRUCTURE) ================= -->
-<header>
-  <div class="nav-head">
+            <div class="nav-center">
+                <form class="search homepage-search" id="searchForm">
+                    <span class="search-icon" aria-hidden="true">⌕</span>
+                    <input
+                        class="search-input"
+                        id="searchInput"
+                        type="text"
+                        name="search"
+                        placeholder="Search books, supplies, and merch"
+                    />
+                </form>
+            </div>
 
-    <div class="nav-start">
-      <div class="logo">
-        <a href="homepage.html" class="logo-label">McNeese Bookstore</a>
-      </div>
-    </div>
+            <div class="nav-end">
+                <a class="cart" href="results.php">
+                    <span class="cart-icon icon-fallback" aria-hidden="true">🛒</span>
+                    <span class="cart-label">Cart</span>
+                </a>
 
-    <div class="nav-center">
-      <form class="search" onsubmit="handleSearch(event)">
-        <input class="search-input" type="text" placeholder="Search books..." id="searchInput">
-      </form>
-    </div>
+                <div class="separator"></div>
 
-    <div class="nav-end">
-      <div class="cart">
-        <div class="cart-icon">
-          <img src="icons/cart.png">
+                <a class="profile" href="login.html">
+                    <span class="profile-icon icon-fallback" aria-hidden="true">👤</span>
+                    <span class="profile-label">Profile</span>
+                </a>
+            </div>
         </div>
-        <a href="#" class="cart-label">Cart</a>
-      </div>
+    </header>
 
-      <div class="separator"></div>
+    <article class="homepage-shell">
+        <section class="hero-section">
+            <div class="hero-copy">
+                <p class="eyebrow">McNeese Online Bookstore</p>
+                <h1>Your campus essentials, all in one place.</h1>
+                <p class="hero-text">
+                    Shop textbooks, school supplies, calculators, and McNeese gear in a homepage
+                    that matches the rest of the project while still feeling complete.
+                </p>
+                <div class="hero-actions">
+                    <a class="hero-btn primary-btn" href="#featured-products">Shop Featured Items</a>
+                    <a class="hero-btn secondary-btn" href="#browse-categories">Browse Categories</a>
+                </div>
+            </div>
 
-      <div class="profile">
-        <div class="profile-icon">
-          <img src="icons/profile.png">
+            <div class="hero-card">
+                <div class="hero-badge">Spring Picks</div>
+                <h2>Popular right now</h2>
+                <ul class="hero-list">
+                    <li>Required course textbooks</li>
+                    <li>Campus merch and gifts</li>
+                    <li>Semester starter bundles</li>
+                    <li>Fast local pickup options</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="value-grid">
+            <div class="value-card">
+                <h3>Course Materials</h3>
+                <p>Find textbooks, lab manuals, workbooks, and class packets for the semester.</p>
+            </div>
+            <div class="value-card">
+                <h3>Best Sellers</h3>
+                <p>See the most popular items students are buying for class and campus life.</p>
+            </div>
+            <div class="value-card">
+                <h3>Fast Fulfillment</h3>
+                <p>Choose campus pickup or delivery for the items you need before class starts.</p>
+            </div>
+            <div class="value-card">
+                <h3>Student Focused</h3>
+                <p>Everything on the page is organized around what McNeese students use most.</p>
+            </div>
+        </section>
+
+        <section id="browse-categories" class="feature-panel">
+            <div class="panel-heading">
+                <h2>Browse Store Categories</h2>
+                <p>A homepage section built around the bookstore theme while still matching the existing project style.</p>
+            </div>
+
+            <div class="category-grid">
+                <a class="category-card" href="results.php?search=textbook">
+                    <h3>Textbooks</h3>
+                    <p>Required books, used copies, and study editions for core classes.</p>
+                </a>
+                <a class="category-card" href="results.php?search=supplies">
+                    <h3>School Supplies</h3>
+                    <p>Notebooks, folders, pens, calculators, and other classroom basics.</p>
+                </a>
+                <a class="category-card" href="results.php?search=merch">
+                    <h3>Campus Merch</h3>
+                    <p>Hoodies, tees, gifts, and school spirit items for students and alumni.</p>
+                </a>
+                <a class="category-card" href="#featured-products">
+                    <h3>Featured Deals</h3>
+                    <p>Specials and highlighted products to draw attention on the homepage.</p>
+                </a>
+            </div>
+        </section>
+
+        <section id="featured-products" class="products-section">
+            <div class="panel-heading">
+                <h2>Featured Products</h2>
+                <p>This section keeps the same bookstore feel as the project while adding simple interaction.</p>
+            </div>
+
+            <div class="shop-layout">
+                <aside class="filter-container homepage-filter">
+                    <h3 class="filter-title">Filter</h3>
+                    <div class="filter-separator"></div>
+
+                    <p class="filter-type">Product Type</p>
+                    <label class="filter-input-label"><input type="checkbox" checked> Books</label>
+                    <label class="filter-input-label"><input type="checkbox" checked> Supplies</label>
+                    <label class="filter-input-label"><input type="checkbox" checked> Merch</label>
+
+                    <p class="filter-type">Condition</p>
+                    <label class="filter-input-label"><input type="checkbox" checked> New</label>
+                    <label class="filter-input-label"><input type="checkbox" checked> Used</label>
+
+                    <p class="filter-type">Availability</p>
+                    <label class="filter-input-label"><input type="checkbox" checked> In Stock</label>
+                    <label class="filter-input-label"><input type="checkbox"> Pickup Today</label>
+                </aside>
+
+                <div class="products-area">
+                    <div class="results-top homepage-results-top">
+                        <div class="results-title">Featured for Students</div>
+                        <div class="sort-container">
+                            <label class="sort-label" for="sortProducts">Sort By</label>
+                            <select class="sort-drop" id="sortProducts">
+                                <option>Featured</option>
+                                <option>Ascending Order</option>
+                                <option>Descending Order</option>
+                                <option>Low to High Price</option>
+                                <option>High to Low Price</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="home-products-grid">
+                        <div class="home-product">
+                            <div class="product-tag">Best Seller</div>
+                            <p class="product-mini">CSCI 309</p>
+                            <h3>Database Systems Textbook</h3>
+                            <p>Popular course material for students taking database and information systems classes.</p>
+                            <div class="price-row">
+                                <span class="price">$84.99</span>
+                                <span class="old-price">$99.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <a class="card-btn" href="results.php?search=database">View Item</a>
+                                <button class="card-btn card-btn-accent add-to-cart" data-item="Database Systems Textbook">Add to Cart</button>
+                            </div>
+                        </div>
+
+                        <div class="home-product">
+                            <div class="product-tag">Starter Kit</div>
+                            <p class="product-mini">Supplies</p>
+                            <h3>Semester Supply Bundle</h3>
+                            <p>Notebook, folder set, highlighters, pens, and index cards for a clean start.</p>
+                            <div class="price-row">
+                                <span class="price">$24.50</span>
+                            </div>
+                            <div class="product-actions">
+                                <a class="card-btn" href="results.php?search=supplies">View Item</a>
+                                <button class="card-btn card-btn-accent add-to-cart" data-item="Semester Supply Bundle">Add to Cart</button>
+                            </div>
+                        </div>
+
+                        <div class="home-product">
+                            <div class="product-tag">Campus Gear</div>
+                            <p class="product-mini">McNeese</p>
+                            <h3>McNeese Spirit Hoodie</h3>
+                            <p>A simple merchandise card to give the homepage more variety and store feel.</p>
+                            <div class="price-row">
+                                <span class="price">$42.00</span>
+                            </div>
+                            <div class="product-actions">
+                                <a class="card-btn" href="results.php?search=hoodie">View Item</a>
+                                <button class="card-btn card-btn-accent add-to-cart" data-item="McNeese Spirit Hoodie">Add to Cart</button>
+                            </div>
+                        </div>
+
+                        <div class="home-product">
+                            <div class="product-tag">Used Copy</div>
+                            <p class="product-mini">Lab Ready</p>
+                            <h3>Engineering Lab Manual</h3>
+                            <p>A sample featured listing that helps fill out the storefront and product grid.</p>
+                            <div class="price-row">
+                                <span class="price">$31.75</span>
+                                <span class="old-price">$44.00</span>
+                            </div>
+                            <div class="product-actions">
+                                <a class="card-btn" href="results.php?search=manual">View Item</a>
+                                <button class="card-btn card-btn-accent add-to-cart" data-item="Engineering Lab Manual">Add to Cart</button>
+                            </div>
+                        </div>
+
+                        <div class="home-product">
+                            <div class="product-tag">Tech</div>
+                            <p class="product-mini">Graphing</p>
+                            <h3>Graphing Calculator</h3>
+                            <p>Fits math and science classes while adding a tech item to the homepage.</p>
+                            <div class="price-row">
+                                <span class="price">$119.99</span>
+                            </div>
+                            <div class="product-actions">
+                                <a class="card-btn" href="results.php?search=calculator">View Item</a>
+                                <button class="card-btn card-btn-accent add-to-cart" data-item="Graphing Calculator">Add to Cart</button>
+                            </div>
+                        </div>
+
+                        <div class="home-product">
+                            <div class="product-tag">New Arrival</div>
+                            <p class="product-mini">Study Pack</p>
+                            <h3>Exam Prep Bundle</h3>
+                            <p>Flash cards, sticky notes, and review sheets grouped into one quick purchase.</p>
+                            <div class="price-row">
+                                <span class="price">$16.95</span>
+                            </div>
+                            <div class="product-actions">
+                                <a class="card-btn" href="results.php?search=study">View Item</a>
+                                <button class="card-btn card-btn-accent add-to-cart" data-item="Exam Prep Bundle">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-columns">
+            <div class="info-card">
+                <h2>Announcements</h2>
+                <ul>
+                    <li>Spring semester textbooks are now available for browsing and purchase.</li>
+                    <li>Online orders can be prepared for campus pickup during normal bookstore hours.</li>
+                    <li>Used book availability may vary depending on current stock.</li>
+                    <li>Featured merchandise and supplies can be promoted here on the homepage.</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h2>Need help finding something?</h2>
+                <p>Use the search bar at the top, head to the results page, or log in to manage your account.</p>
+                <div class="quick-links">
+                    <a href="results.php?search=books">Shop Books</a>
+                    <a href="results.php?search=supplies">School Supplies</a>
+                    <a href="login.html">Student Login</a>
+                    <a href="#featured-products">Featured Deals</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cart-status" id="cartStatus" aria-live="polite">
+            Cart is empty.
+        </section>
+    </article>
+
+    <footer>
+        <div class="nav-foot">
+            <div class="foot-start">
+                <a class="contact" href="mailto:bookstore@mcneese.edu">
+                    <span class="contact-label">Contact Us</span>
+                    <span class="contact-subtext">Having issues with your order? Have any questions?<br>Please reach out to us if so.</span>
+                </a>
+            </div>
+
+            <div class="foot-center">
+                <span class="hours-label">Store Hours</span>
+                <span class="hours-subtext">
+                    Monday - Wednesday: 7:30 AM - 5:00 PM<br>
+                    Thursday: 7:30 AM - 6:00 PM<br>
+                    Friday: 7:30 AM - 11:30 AM
+                </span>
+            </div>
+
+            <div class="foot-end">
+                <span class="social-label">Follow Us</span>
+                <div class="social-links">
+                    <a class="social-icon social-fallback" href="#" aria-label="Facebook">f</a>
+                    <a class="social-icon social-fallback" href="#" aria-label="Instagram">◎</a>
+                    <a class="social-icon social-fallback" href="#" aria-label="TikTok">♪</a>
+                </div>
+            </div>
         </div>
-        <a href="Profile.html" class="profile-label">Profile</a>
-      </div>
-    </div>
+    </footer>
 
-  </div>
-</header>
+    <script>
+        (function () {
+            const searchForm = document.getElementById('searchForm');
+            const searchInput = document.getElementById('searchInput');
+            const cartStatus = document.getElementById('cartStatus');
+            const cartButtons = document.querySelectorAll('.add-to-cart');
+            const sortProducts = document.getElementById('sortProducts');
 
-<!-- ================= MAIN CONTENT ================= -->
-<article>
+            let cartCount = 0;
 
-<div class="page-content">
+            searchForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const value = searchInput.value.trim();
+                if (value.length === 0) {
+                    window.location.href = 'results.php';
+                } else {
+                    window.location.href = 'results.php?search=' + encodeURIComponent(value);
+                }
+            });
 
-  <div class="results-container">
+            cartButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    cartCount += 1;
+                    const itemName = button.getAttribute('data-item');
+                    cartStatus.textContent = itemName + ' added to cart. Total items: ' + cartCount + '.';
+                });
+            });
 
-    <!-- TITLE -->
-    <div class="results-top">
-      <h1 class="results-title">Featured Books</h1>
-    </div>
-
-    <!-- PRODUCTS -->
-    <div class="results-bottom">
-
-      <div class="products-container">
-
-        <div class="product-container">
-          <p class="item-name-label">Database Systems</p>
-          <p class="item-price-label">$89.99</p>
-          <button class="cart-button" onclick="addToCart('Database Systems')">Add to Cart</button>
-        </div>
-
-        <div class="product-container">
-          <p class="item-name-label">Cybersecurity Basics</p>
-          <p class="item-price-label">$74.99</p>
-          <button class="cart-button" onclick="addToCart('Cybersecurity Basics')">Add to Cart</button>
-        </div>
-
-        <div class="product-container">
-          <p class="item-name-label">Web Development</p>
-          <p class="item-price-label">$59.99</p>
-          <button class="cart-button" onclick="addToCart('Web Development')">Add to Cart</button>
-        </div>
-
-        <div class="product-container">
-          <p class="item-name-label">Networking Essentials</p>
-          <p class="item-price-label">$69.99</p>
-          <button class="cart-button" onclick="addToCart('Networking Essentials')">Add to Cart</button>
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-</article>
-
-<!-- ================= FOOTER (EXACT STRUCTURE) ================= -->
-<footer>
-  <div class="nav-foot">
-
-    <div class="foot-start">
-      <div class="contact">
-        <p class="contact-label">Contact</p>
-        <p class="contact-subtext">support@mcneese.edu</p>
-      </div>
-    </div>
-
-    <div class="foot-center">
-      <p class="hours-label">Hours</p>
-      <p class="hours-subtext">Mon–Fri: 8am–5pm</p>
-    </div>
-
-    <div class="foot-end">
-      <p class="social-label">Follow Us</p>
-      <div class="social-links">
-        <div class="social-icon"><img src="icons/facebook.png"></div>
-        <div class="social-icon"><img src="icons/twitter.png"></div>
-      </div>
-    </div>
-
-  </div>
-</footer>
-
-<!-- ================= SIMPLE JS ================= -->
-<script>
-function handleSearch(e) {
-    e.preventDefault();
-    const query = document.getElementById("searchInput").value;
-    window.location.href = "results.html?search=" + query;
-}
-
-function addToCart(item) {
-    alert(item + " added to cart!");
-}
-</script>
-
+            sortProducts.addEventListener('change', function () {
+                cartStatus.textContent = 'Sort set to: ' + sortProducts.value + '.';
+            });
+        })();
+    </script>
 </body>
 </html>
