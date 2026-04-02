@@ -1,0 +1,491 @@
+@import url('https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Kaisei+Opti&family=Questrial&display=swap');
+
+body {
+    background: #ffffff;
+}
+
+header,
+footer {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.nav-head,
+.nav-foot {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+    box-sizing: border-box;
+}
+
+.nav-start,
+.nav-center,
+.nav-end,
+.foot-start,
+.foot-center,
+.foot-end {
+    min-width: 0;
+}
+
+.logo-label {
+    white-space: nowrap;
+}
+
+.homepage-search {
+    width: 520px;
+    max-width: 100%;
+}
+
+.search-input {
+    width: 100%;
+}
+
+.icon-fallback {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: rgba(255, 210, 3, 0.2);
+    color: #ffffff;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.separator {
+    flex: 0 0 3px;
+}
+
+.foot-start,
+.foot-end {
+    margin: 0;
+}
+
+.homepage-shell {
+    width: min(1180px, calc(100% - 48px));
+    margin: 42px auto 56px auto;
+}
+
+.hero-section {
+    display: grid;
+    grid-template-columns: 1.45fr 0.95fr;
+    gap: 24px;
+    align-items: stretch;
+    margin-bottom: 26px;
+}
+
+.hero-copy,
+.hero-card,
+.feature-panel,
+.products-section,
+.info-card,
+.cart-status {
+    border-radius: 18px;
+    box-shadow: 0 12px 24px rgba(0, 82, 155, 0.08);
+}
+
+.hero-copy {
+    background: linear-gradient(135deg, #00529b 0%, #0a67ba 100%);
+    color: #ffffff;
+    padding: 34px 34px 30px 34px;
+}
+
+.eyebrow {
+    margin: 0 0 10px 0;
+    font-family: "Questrial", sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.hero-copy h1,
+.hero-card h2,
+.panel-heading h2,
+.info-card h2 {
+    font-family: "Kaisei Opti", sans-serif;
+}
+
+.hero-copy h1 {
+    margin: 0 0 16px 0;
+    font-size: 42px;
+    line-height: 1.1;
+}
+
+.hero-text {
+    margin: 0 0 24px 0;
+    font-family: "Questrial", sans-serif;
+    font-size: 18px;
+    line-height: 1.55;
+    max-width: 700px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.hero-btn,
+.card-btn,
+.quick-links a {
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.hero-btn {
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-family: "Kaisei Opti", sans-serif;
+    font-size: 16px;
+}
+
+.primary-btn {
+    background: #ffd203;
+    color: #0b2e4f;
+}
+
+.primary-btn:hover,
+.card-btn-accent:hover {
+    background: #e7bd02;
+}
+
+.secondary-btn {
+    border: 1px solid rgba(255,255,255,0.55);
+    color: #ffffff;
+}
+
+.secondary-btn:hover {
+    background: rgba(255,255,255,0.12);
+}
+
+.hero-card {
+    background: #f6f9fc;
+    border: 1px solid #d7e4f1;
+    padding: 28px;
+}
+
+.hero-badge,
+.product-tag {
+    display: inline-block;
+    width: fit-content;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #ffd203;
+    color: #1d2f45;
+    font-family: "Questrial", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.hero-card h2 {
+    margin: 14px 0 12px 0;
+    font-size: 28px;
+    color: #073966;
+}
+
+.hero-list {
+    margin: 0;
+    padding-left: 20px;
+    font-family: "Questrial", sans-serif;
+    line-height: 1.9;
+    color: #25384d;
+}
+
+.value-grid,
+.category-grid,
+.info-columns,
+.quick-links,
+.product-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.value-grid {
+    margin-bottom: 26px;
+}
+
+.value-card,
+.category-card {
+    flex: 1 1 220px;
+    background: #ebebeb;
+    border-radius: 16px;
+    padding: 22px;
+}
+
+.value-card h3,
+.category-card h3,
+.home-product h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-family: "Kaisei Opti", sans-serif;
+    color: #09385f;
+}
+
+.value-card p,
+.category-card p,
+.home-product p,
+.panel-heading p,
+.info-card p,
+.info-card li {
+    font-family: "Questrial", sans-serif;
+    color: #283748;
+    line-height: 1.55;
+}
+
+.feature-panel,
+.products-section {
+    background: #ffffff;
+    border: 1px solid #dae4ee;
+    padding: 26px;
+    margin-bottom: 26px;
+}
+
+.panel-heading {
+    margin-bottom: 22px;
+}
+
+.panel-heading h2 {
+    margin: 0 0 8px 0;
+    font-size: 30px;
+    color: #073966;
+}
+
+.category-card {
+    text-decoration: none;
+    box-shadow: inset 0 0 0 1px rgba(0, 82, 155, 0.06);
+}
+
+.category-card:hover {
+    transform: translateY(-2px);
+}
+
+.shop-layout {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.homepage-filter {
+    background: #f8fafc;
+    border: 1px solid #d6e0ea;
+    border-radius: 14px;
+    padding: 18px;
+}
+
+.homepage-filter input {
+    margin-right: 8px;
+}
+
+.products-area {
+    min-width: 0;
+}
+
+.homepage-results-top {
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.home-products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.home-product {
+    background: #ebebeb;
+    border-radius: 16px;
+    padding: 18px;
+    min-height: 250px;
+}
+
+.product-mini {
+    margin: 12px 0 6px 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 12px 0 16px 0;
+}
+
+.price,
+.old-price {
+    font-family: "Kaisei Opti", sans-serif;
+    font-weight: bold;
+}
+
+.price {
+    color: #073966;
+    font-size: 20px;
+}
+
+.old-price {
+    color: #8b8b8b;
+    text-decoration: line-through;
+    font-size: 15px;
+}
+
+.card-btn {
+    display: inline-block;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    background: #00529b;
+    color: #ffffff;
+    font-family: "Questrial", sans-serif;
+    cursor: pointer;
+}
+
+.card-btn:hover {
+    background: #00457f;
+}
+
+.card-btn-accent {
+    background: #ffd203;
+    color: #12263a;
+}
+
+.info-columns {
+    margin-bottom: 18px;
+}
+
+.info-card {
+    flex: 1 1 360px;
+    background: #ffffff;
+    border: 1px solid #dae4ee;
+    padding: 24px;
+}
+
+.info-card ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.quick-links a {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: #00529b;
+    color: #ffffff;
+    font-family: "Questrial", sans-serif;
+}
+
+.quick-links a:hover {
+    background: #00457f;
+}
+
+.cart-status {
+    background: #f4f8fc;
+    border: 1px solid #d6e0ea;
+    padding: 16px 20px;
+    font-family: "Questrial", sans-serif;
+    color: #1c3149;
+}
+
+.social-fallback {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    text-decoration: none;
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.65);
+    border-radius: 50%;
+    font-size: 20px;
+}
+
+.social-fallback:hover {
+    background: rgba(255,255,255,0.12);
+}
+
+@media (max-width: 1100px) {
+    .hero-section,
+    .shop-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .home-products-grid {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+    }
+
+    .nav-head {
+        gap: 18px;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    header {
+        height: auto;
+        min-height: 65px;
+    }
+
+    .nav-start,
+    .nav-center,
+    .nav-end {
+        margin: 0;
+    }
+
+    .nav-end {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 760px) {
+    .homepage-shell {
+        width: min(100% - 28px, 1180px);
+    }
+
+    .home-products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-copy {
+        padding: 24px;
+    }
+
+    .hero-copy h1 {
+        font-size: 32px;
+    }
+
+    .homepage-search {
+        width: 100%;
+    }
+
+    .nav-center {
+        width: 100%;
+    }
+
+    .nav-end {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    footer {
+        height: auto;
+    }
+
+    .nav-foot {
+        flex-direction: column;
+        gap: 22px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .foot-center,
+    .foot-end {
+        margin: 0;
+    }
+}
