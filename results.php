@@ -1,6 +1,29 @@
 <!-- This page serves as template for the majority of the pages
      to maintain consistency throughout the website. Add more
      elements as needed for your page's needs. -->
+<?php
+require 'db_connection.php';
+
+$search = $_GET['search'] ?? '';
+
+if(empty($search)) {
+    header("Location: Product.html");
+    exit;
+}
+
+$sql = "SELECT * FROM product
+        WHERE title ILIKE :search
+        OR isbn ILIKE :search
+        OR title ILIKE :search
+        OR author ILIKE :search
+        OR publisher ILIKE :search";
+$stmt = $pdo->prepare($sql);
+
+$stmt->execute(['search' => "%$search%"]);
+
+$results = $stmt->fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -57,7 +80,7 @@
                 <div class="results-container">
                     <div class="results-top">
                         <div class="results-title">
-                            <p>Results for item</p>
+                            <p>Results for "<?= $search ?>"</p>
                         </div>
                         <div class="sort-container">
                             <form class="sort-form" action="" id="sort">
@@ -89,15 +112,25 @@
                             </form>
                         </div>
                         <div class="products-container">
-                            <div class="product-container">
-                                <img src="">
-                                <p class="item-name-label">Item Name</p>
-                                <p class="item-info-label">Author/Seller/Brand</p>
-                                <p class="item-info-label">ISBN/Publisher</p>
-                                <p class="item-price-label">Price (Condition)</p>
-                                <button class="cart-button">Add to Cart</button>
-                                <a href="">Wishlist</a>
-                            </div>
+                            <?php
+                            if(!empty($results)) {
+                                foreach ($results as $row): ?>
+                                    <div class="product-container">
+                                        <img src="">
+                                        <p class="item-name-label"><?= htmlspecialchars($row['title']) ?></p>
+                                        <p class="item-info-label"><?= htmlspecialchars($row['isbn']) ?></p>
+                                        <p class="item-info-label"><?= htmlspecialchars($row['author']) ?></p>
+                                        <p class="item-price-label">$<?= htmlspecialchars($row['price']) ?> (<?= htmlspecialchars($row['condition']) ?>)</p>
+                                        <button class="cart-button">Add to Cart</button>
+                                        <a href="">Wishlist</a>
+                                    </div>
+                                <?php endforeach;
+                            }
+
+                            else {
+                                echo "<p>No Results Found</p>";
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
