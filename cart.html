@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+    <link rel="stylesheet" href="Cart.css">
+</head>
+<body>
+
+    <header>
+        <div class="nav-head">
+            <div class="nav-start">
+                <div class="logo">
+                    <a href="index.html" class="logo-label">McNeese Bookstore</a>
+                </div>
+            </div>
+
+            <div class="nav-center">
+                <div class="search">
+                    <span class="search-icon">⌕</span>
+                    <input class="search-input" type="text" placeholder="Search books, rentals, apparel...">
+                </div>
+            </div>
+
+            <div class="nav-end">
+                <div class="cart">
+                    <div class="cart-icon">
+                        <img src="cart.svg" alt="Cart">
+                    </div>
+                    <a href="cart.html" class="cart-label">Cart</a>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="profile">
+                    <div class="profile-icon">
+                        <img src="profile.svg" alt="Profile">
+                    </div>
+                    <a href="profile.html" class="profile-label">Profile</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="cart-page">
+        <section class="page-title">
+            <h1>Your Cart</h1>
+            <p>Review your selected items before proceeding to checkout.</p>
+        </section>
+
+        <section class="cart-layout">
+            <div class="cart-items-section">
+                <h2>Cart Items</h2>
+
+                <div class="cart-item" data-product-id="1">
+                    <div class="item-image">
+                        <img src="images/calculus-textbook.jpg" alt="Calculus Textbook">
+                    </div>
+
+                    <div class="item-details">
+                        <h3>Calculus Textbook</h3>
+                        <p class="item-type">Textbook</p>
+                        <p class="item-price" data-price="89.99">$89.99</p>
+                    </div>
+
+                    <div class="item-quantity">
+                        <label for="qty1">Qty</label>
+                        <input type="number" id="qty1" class="qty-input" value="1" min="1">
+                    </div>
+
+                    <div class="item-total">
+                        <p class="line-total">$89.99</p>
+                        <button type="button" class="remove-btn">Remove</button>
+                    </div>
+                </div>
+
+                <div class="cart-item" data-product-id="2">
+                    <div class="item-image">
+                        <img src="images/university-hoodie.jpg" alt="University Hoodie">
+                    </div>
+
+                    <div class="item-details">
+                        <h3>University Hoodie</h3>
+                        <p class="item-type">Apparel</p>
+                        <p class="item-price" data-price="42.50">$42.50</p>
+                    </div>
+
+                    <div class="item-quantity">
+                        <label for="qty2">Qty</label>
+                        <input type="number" id="qty2" class="qty-input" value="1" min="1">
+                    </div>
+
+                    <div class="item-total">
+                        <p class="line-total">$42.50</p>
+                        <button type="button" class="remove-btn">Remove</button>
+                    </div>
+                </div>
+
+                <div class="cart-item" data-product-id="3">
+                    <div class="item-image">
+                        <img src="images/academic-planner.jpg" alt="Academic Planner">
+                    </div>
+
+                    <div class="item-details">
+                        <h3>Academic Planner</h3>
+                        <p class="item-type">Supplies</p>
+                        <p class="item-price" data-price="11.99">$11.99</p>
+                    </div>
+
+                    <div class="item-quantity">
+                        <label for="qty3">Qty</label>
+                        <input type="number" id="qty3" class="qty-input" value="1" min="1">
+                    </div>
+
+                    <div class="item-total">
+                        <p class="line-total">$11.99</p>
+                        <button type="button" class="remove-btn">Remove</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-section">
+                <h2>Order Summary</h2>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="subtotal">$0.00</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>Estimated Tax</span>
+                    <span id="tax">$0.00</span>
+                </div>
+
+                <div class="summary-row total-row">
+                    <span>Total</span>
+                    <span id="total">$0.00</span>
+                </div>
+
+                <button class="checkout-btn" type="button">Proceed to Checkout</button>
+                <button class="continue-btn" type="button" onclick="window.location.href='index.html'">Continue Shopping</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="nav-foot">
+            <div class="foot-start">
+                <div class="contact">
+                    <a href="#" class="contact-label">Contact Us</a>
+                    <span class="contact-subtext">support@campusstore.edu</span>
+                </div>
+            </div>
+
+            <div class="foot-center">
+                <span class="hours-label">Store Hours</span>
+                <span class="hours-subtext">Mon - Fri: 8 AM - 5 PM</span>
+            </div>
+
+            <div class="foot-end">
+                <span class="social-label">Follow Us</span>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><img src="facebook.png" alt="Facebook"></a>
+                    <a href="#" class="social-icon"><img src="instagram.png" alt="Instagram"></a>
+                    <a href="#" class="social-icon"><img src="tiktok.png" alt="TikTok"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function updateCartTotals() {
+            let subtotal = 0;
+            const cartItems = document.querySelectorAll(".cart-item");
+
+            cartItems.forEach(item => {
+                const priceElement = item.querySelector(".item-price");
+                const qtyElement = item.querySelector(".qty-input");
+                const lineTotalElement = item.querySelector(".line-total");
+
+                const price = parseFloat(priceElement.getAttribute("data-price")) || 0;
+                let qty = parseInt(qtyElement.value) || 1;
+
+                if (qty < 1) {
+                    qty = 1;
+                    qtyElement.value = 1;
+                }
+
+                const lineTotal = price * qty;
+                lineTotalElement.textContent = "$" + lineTotal.toFixed(2);
+
+                subtotal += lineTotal;
+            });
+
+            const tax = subtotal * 0.08;
+            const total = subtotal + tax;
+
+            document.getElementById("subtotal").textContent = "$" + subtotal.toFixed(2);
+            document.getElementById("tax").textContent = "$" + tax.toFixed(2);
+            document.getElementById("total").textContent = "$" + total.toFixed(2);
+        }
+
+        document.addEventListener("input", function(event) {
+            if (event.target.classList.contains("qty-input")) {
+                updateCartTotals();
+            }
+        });
+
+        document.addEventListener("click", function(event) {
+            if (event.target.classList.contains("remove-btn")) {
+                const cartItem = event.target.closest(".cart-item");
+                if (cartItem) {
+                    cartItem.remove();
+                    updateCartTotals();
+                }
+            }
+        });
+
+        window.addEventListener("load", function() {
+            updateCartTotals();
+        });
+    </script>
+
+</body>
+</html>
