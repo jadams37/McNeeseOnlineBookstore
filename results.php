@@ -6,22 +6,24 @@ require 'db_connection.php';
 
 $search = $_GET['search'] ?? '';
 
-if(empty($search)) {
+if(empty($search)):
     header("Location: Product.html");
     exit;
-}
 
-$sql = "SELECT * FROM product
-        WHERE title ILIKE :search
-        OR isbn ILIKE :search
-        OR title ILIKE :search
-        OR author ILIKE :search
-        OR publisher ILIKE :search";
-$stmt = $pdo->prepare($sql);
+else:
+    $sql = "SELECT * FROM product
+            WHERE title ILIKE :search
+            OR isbn ILIKE :search
+            OR title ILIKE :search
+            OR author ILIKE :search
+            OR publisher ILIKE :search";
 
-$stmt->execute(['search' => "%$search%"]);
+    $stmt = $pdo->prepare($sql);
 
-$results = $stmt->fetchAll();
+    $stmt->execute(['search' => "%$search%"]);
+
+    $results = $stmt->fetchAll();
+endif;
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +56,7 @@ $results = $stmt->fetchAll();
                     </div>
                 </div>
                 <div class="nav-center">
-                    <form action="searchdb.php" method="post">
+                    <form action="results.php" method="get">
                         <div class="search">
                             <span class="search-icon material-symbols-outlined">search</span>
                             <input class="search-input" type="text" name="search" placeholder="Search">
@@ -80,7 +82,7 @@ $results = $stmt->fetchAll();
                 <div class="results-container">
                     <div class="results-top">
                         <div class="results-title">
-                            <p>Results for "<?= $search ?>"</p>
+                            <p>Results for "<?php echo htmlspecialchars($search) ?>"</p>
                         </div>
                         <div class="sort-container">
                             <form class="sort-form" action="" id="sort">
@@ -112,25 +114,21 @@ $results = $stmt->fetchAll();
                             </form>
                         </div>
                         <div class="products-container">
-                            <?php
-                            if(!empty($results)) {
+                            <?php if(!empty($results)):
                                 foreach ($results as $row): ?>
                                     <div class="product-container">
                                         <img src="">
-                                        <p class="item-name-label"><?= htmlspecialchars($row['title']) ?></p>
-                                        <p class="item-info-label"><?= htmlspecialchars($row['isbn']) ?></p>
-                                        <p class="item-info-label"><?= htmlspecialchars($row['author']) ?></p>
-                                        <p class="item-price-label">$<?= htmlspecialchars($row['price']) ?> (<?= htmlspecialchars($row['condition']) ?>)</p>
+                                        <p class="item-name-label"><?php echo htmlspecialchars($row['title']) ?></p>
+                                        <p class="item-info-label"><?php echo htmlspecialchars($row['isbn']) ?></p>
+                                        <p class="item-info-label"><?php echo htmlspecialchars($row['author']) ?></p>
+                                        <p class="item-price-label">$<?php echo htmlspecialchars($row['price']) ?> (<?php echo htmlspecialchars($row['condition']) ?>)</p>
                                         <button class="cart-button">Add to Cart</button>
                                         <a href="">Wishlist</a>
                                     </div>
                                 <?php endforeach;
-                            }
-
-                            else {
+                                else:
                                 echo "<p>No Results Found</p>";
-                            }
-                            ?>
+                            endif ?>
                         </div>
                     </div>
                 </div>
