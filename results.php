@@ -15,7 +15,8 @@ else:
             WHERE title ILIKE :search
             OR isbn ILIKE :search
             OR author ILIKE :search
-            OR publisher ILIKE :search";
+            OR publisher ILIKE :search
+            ORDER BY title ASC";
 
     $stmt = $pdo->prepare($sql);
 
@@ -44,6 +45,8 @@ endif;
         <link rel="stylesheet" href="css/shared.css">
         <link rel="stylesheet" href="css/results.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search">
+        <script src="scripts/add-to-wishlist.js" defer></script>
+        <script src="scripts/sort-results.js" defer></script>
     </head>
     <body>
         <!-- Navigation Bar -->
@@ -84,9 +87,9 @@ endif;
                             <p>Results for "<?php echo htmlspecialchars($search) ?>"</p>
                         </div>
                         <div class="sort-container">
-                            <form class="sort-form" action="" id="sort">
+                            <form class="sort-form" id="sort">
                                 <label for="sort-by" class="sort-label">Sort By</label>
-                                <select class="sort-drop" id="sort">
+                                <select class="sort-drop" name="sort" id="sort-by">
                                     <option value="ascending">Ascending Order</option>
                                     <option value="descending">Descending Order</option>
                                     <option value="asc-price">Low to High Price</option>
@@ -121,8 +124,10 @@ endif;
                                         <p class="item-info-label"><?php echo htmlspecialchars($row['isbn']) ?></p>
                                         <p class="item-info-label"><?php echo htmlspecialchars($row['author']) ?></p>
                                         <p class="item-price-label">$<?php echo htmlspecialchars($row['price']) ?> (<?php echo htmlspecialchars($row['condition']) ?>)</p>
-                                        <button class="cart-button">Add to Cart</button>
-                                        <a href="">Wishlist</a>
+                                        <div class="item-buttons">
+                                            <button class="cart-button">Add to Cart</button>
+                                            <button class="wishlist-button" id="wishlist"></button>
+                                        </div>
                                     </div>
                                 <?php endforeach;
                                 else:

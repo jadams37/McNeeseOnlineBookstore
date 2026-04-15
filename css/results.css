@@ -5,6 +5,7 @@
     --sort-bg-color: #00529B;
     --sort-value-color: #ffffff;
     --button-color: #FFD203;
+    --button-color-alt: #00529B;
     --button-highlight-color: #e6bd03;
 
     --results-title-font-size: 26px;
@@ -168,6 +169,11 @@
     font-weight: bold;
 }
 
+.item-buttons {
+    display: flex;
+    width: 80%;
+}
+
 .cart-button {
     height: 32px;
     width: 80%;
@@ -178,6 +184,20 @@
     border: none;
     border-radius: 34px;
     transition: background-color 0.25s;
+}
+
+.wishlist-button {
+    height: 32px;
+    width: 20%;
+    font-family: Questrial;
+    font-weight: bold;
+    font-size: var(--subtext-font-size);
+    background-color: transparent;
+    border: none;
+    transition: background-color 0.25s;
+    background-image: url(../icons/wishlist.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .cart-button:hover {
