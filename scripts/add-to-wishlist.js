@@ -1,18 +1,14 @@
-let isWishlisted = false;
+document.addEventListener('click', function(e) {
+    if(e.target.classList.contains('wishlist-button')) {
+        const isActive = e.target.dataset.active === "true";
 
-const buttons = document.querySelectorAll('#wishlist')
-
-buttons.forEach(button => {
-    button.addEventListener('click', function(e) {
-        toggleWishlist();
-
-        if(!isWishlisted) { button.style.backgroundImage = "url(./icons/wishlist.svg)"; }
-
-        else { button.style.backgroundImage = "url(./icons/wishlistactive.svg)"; }
-    })
+        if(!isActive) {
+            e.target.dataset.active = "true";
+            e.target.style.backgroundImage = "url(./icons/wishlistactive.svg)";
+        }
+        else {
+            e.target.dataset.active = "false";
+            e.target.style.backgroundImage = "url(./icons/wishlist.svg)";
+        }
+    }
 })
-
-function toggleWishlist() {
-    if(!isWishlisted) { isWishlisted = true }
-    else { isWishlisted = false }
-}
