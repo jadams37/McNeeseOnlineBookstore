@@ -73,14 +73,26 @@ window.addEventListener('DOMContentLoaded', async () => {
                         })
                     });
 
-                    const data = await response.json();
+                    console.log('Response status:', response.status);
+                    console.log('Response headers:', response.headers);
+                    const responseText = await response.text();
+                    console.log('Response text:', responseText);
 
                     if (!response.ok) {
-                        throw new Error(data.message || 'Unable to add to cart.');
+                        // Try to parse as JSON, but if it fails, show the raw response
+                        try {
+                            const data = JSON.parse(responseText);
+                            throw new Error(data.message || 'Unable to add to cart.');
+                        } catch (jsonError) {
+                            throw new Error(`Server error (${response.status}): ${responseText.substring(0, 200)}`);
+                        }
                     }
+
+                    const data = JSON.parse(responseText);
 
                     alert('Item added to cart!');
                 } catch (error) {
+                    console.error('Add to cart error:', error);
                     alert(error.message || 'Unable to add to cart right now.');
                 }
             });
