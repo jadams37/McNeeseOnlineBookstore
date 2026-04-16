@@ -28,8 +28,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute(['search' => "%$search%"]);
 $results = $stmt->fetchAll();
 
-// Return HTML (simplest approach)
-if (!empty($results)):
+if(!empty($results)):
     foreach ($results as $row): ?>
         <div class="product-container">
             <img src="">
@@ -43,6 +42,4 @@ if (!empty($results)):
             </div>
         </div>
     <?php endforeach;
-else:
-    echo "<p>No Results Found</p>";
 endif;
