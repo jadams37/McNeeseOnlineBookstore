@@ -100,18 +100,18 @@ endif;
                     </div>
                     <div class="results-bottom">
                         <div class="filter-container">
-                            <form class="filter-form" action="" id="filter">
+                            <form class="filter-form" id="filter">
                                 <p class="filter-title">Filter</p>
                                 <div class="filter-separator"></div>
                                 <p class="filter-type">Product Type</p>
-                                <input class="filter-input" id="books" type="checkbox" name="books">
+                                <input class="filter-input" id="books" type="checkbox" name="type" value="books">
                                 <label for="books" class="filter-input-label">Books</label><br>
-                                <input class="filter-input" id="supplies" type="checkbox" name="supplies">
+                                <input class="filter-input" id="supplies" type="checkbox" name="type" value="supplies">
                                 <label for="supplies" class="filter-input-label">Supplies</label>
                                 <p class="filter-type">Condition</p>
-                                <input class="filter-input" id="new" type="checkbox" name="new">
+                                <input class="filter-input" id="new" type="checkbox" name="condition" value="new">
                                 <label for="new" class="filter-input-label">New</label><br>
-                                <input class="filter-input" id="used" type="checkbox" name="used">
+                                <input class="filter-input" id="used" type="checkbox" name="condition" value="used">
                                 <label for="used" class="filter-input-label">Used</label>
                             </form>
                         </div>
