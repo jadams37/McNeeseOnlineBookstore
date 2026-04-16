@@ -1,10 +1,13 @@
 <?php
+/* PHP script to update the results with a set sorted based
+   on the selected order method. */
 require 'db_connection.php';
 
 $search = $_GET['search'] ?? '';
 $sort = $_GET['sort'] ?? 'ascending';
 $orderBy = "title ASC";
 
+/* Switches sort value to determine order in query */
 switch ($sort) {
     case "descending":
         $orderBy = "title DESC";

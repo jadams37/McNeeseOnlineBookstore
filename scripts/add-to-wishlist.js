@@ -1,3 +1,5 @@
+/* Adds an EventListener to check for if a wishlist button for
+   a product is clicked and updates the icon to represent its state. */
 document.addEventListener('click', function(e) {
     if(e.target.classList.contains('wishlist-button')) {
         const isActive = e.target.dataset.active === "true";
