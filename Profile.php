@@ -1,7 +1,7 @@
 <?php
 require 'db_connection.php';
 
-session_start();
+/*session_start();
 
 if(!isset($_SESSION['user_id'])) {
     header("Location: login.html");
@@ -20,7 +20,7 @@ else {
     $stmt->execute(['user_id' => $user_id]);
 
     $results = $stmt->fetchAll();
-}
+}*/
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +39,7 @@ else {
         <div class="nav-head">
             <div class="nav-start">
                 <div class="logo">
-                    <a href="index.html" class="logo-label">McNeese BookStore</a>
+                    <a href="index.html" class="logo-label">McNeese Bookstore</a>
                 </div>
             </div>
 
@@ -53,12 +53,12 @@ else {
 
                 <div class="cart">
                         <a href="" class="cart-label">Cart</a>
-                        <a href="" class="cart-icon"><img src="cart.svg"></a>
+                        <a href="" class="cart-icon"><img src="icons/cart.svg"></a>
                     </div>
                     <div class="separator"></div>
                     <div class="profile">
                         <a href="" class="profile-label">Profile</a>
-                        <a href="" class="profile-icon"><img src="profile.svg"></a>
+                        <a href="" class="profile-icon"><img src="icons/profile.svg"></a>
                     </div>               
             </div>
         </div>
@@ -177,9 +177,9 @@ else {
             <div class="foot-end">
                 <span class="social-label">Socials</span>
                 <div class="social-links">
-                    <a href="#" class="social-icon"><img src="images/facebook.svg" alt="Facebook"></a>
-                    <a href="#" class="social-icon"><img src="images/instagram.svg" alt="Instagram"></a>
-                    <a href="#" class="social-icon"><img src="images/twitter.svg" alt="Twitter"></a>
+                    <a href="#" class="social-icon"><img src="icons/facebook.png" alt="Facebook"></a>
+                    <a href="#" class="social-icon"><img src="icons/instagram.png" alt="Instagram"></a>
+                    <a href="#" class="social-icon"><img src="icons/tiktok.png" alt="TikTok"></a>
                 </div>
             </div>
         </div>
