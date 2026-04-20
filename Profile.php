@@ -1,7 +1,7 @@
 <?php
 require 'db_connection.php';
 
-/*session_start();
+session_start();
 
 if(!isset($_SESSION['user_id'])) {
     header("Location: login.html");
@@ -20,7 +20,7 @@ else {
     $stmt->execute(['user_id' => $user_id]);
 
     $results = $stmt->fetchAll();
-}*/
+}
 ?>
 
 <!DOCTYPE html>
