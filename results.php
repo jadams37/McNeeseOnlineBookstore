@@ -6,11 +6,12 @@ require 'db_connection.php';
 
 $search = $_GET['search'] ?? '';
 
-if(empty($search)):
+if(empty($search)) {
     header("Location: Product.html");
     exit;
+}
 
-else:
+else {
     $sql = "SELECT * FROM product
             WHERE title ILIKE :search
             OR isbn ILIKE :search
@@ -23,7 +24,7 @@ else:
     $stmt->execute(['search' => "%$search%"]);
 
     $results = $stmt->fetchAll();
-endif;
+}
 ?>
 
 <!DOCTYPE html>
