@@ -138,7 +138,7 @@
                     <span id="total">$0.00</span>
                 </div>
 
-                <button class="checkout-btn" type="button">Proceed to Checkout</button>
+                <button class="checkout-btn" id="openCheckoutBtn" type="button">Proceed to Checkout</button>
                 <button class="continue-btn" type="button" onclick="window.location.href='index.html'">Continue Shopping</button>
             </div>
         </section>
@@ -168,6 +168,89 @@
             </div>
         </div>
     </footer>
+
+    <!-- Checkout Popup -->
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-modal-content">
+            <button class="close-modal" id="closeCheckoutBtn" type="button">&times;</button>
+
+            <h2>Checkout</h2>
+            <p class="checkout-subtext">Complete your order without leaving this page.</p>
+
+            <form id="checkoutForm">
+                <div class="checkout-grid">
+                    <div class="checkout-field">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" required>
+                    </div>
+
+                    <div class="checkout-field">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+
+                    <div class="checkout-field">
+                        <label for="address">Shipping Address</label>
+                        <input type="text" id="address" required>
+                    </div>
+
+                    <div class="checkout-field">
+                        <label for="city">City</label>
+                        <input type="text" id="city" required>
+                    </div>
+
+                    <div class="checkout-field">
+                        <label for="state">State</label>
+                        <input type="text" id="state" required>
+                    </div>
+
+                    <div class="checkout-field">
+                        <label for="zip">ZIP Code</label>
+                        <input type="text" id="zip" maxlength="5" required>
+                    </div>
+
+                    <div class="checkout-field">
+                        <label for="cardName">Name on Card</label>
+                        <input type="text" id="cardName" required>
+                    </div>
+
+                    <div class="checkout-field">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" maxlength="16" placeholder="1234567890123456" required>
+                    </div>
+
+                    <div class="checkout-field">
+                        <label for="expDate">Expiration Date</label>
+                        <input type="text" id="expDate" maxlength="5" placeholder="MM/YY" required>
+                    </div>
+
+                    <div class="checkout-field">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" maxlength="4" required>
+                    </div>
+                </div>
+
+                <div class="checkout-summary-box">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="modalSubtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Estimated Tax</span>
+                        <span id="modalTax">$0.00</span>
+                    </div>
+                    <div class="summary-row total-row">
+                        <span>Total</span>
+                        <span id="modalTotal">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="checkout-actions">
+                    <button type="submit" class="place-order-btn">Place Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script>
         function updateCartTotals() {
@@ -199,7 +282,54 @@
             document.getElementById("subtotal").textContent = "$" + subtotal.toFixed(2);
             document.getElementById("tax").textContent = "$" + tax.toFixed(2);
             document.getElementById("total").textContent = "$" + total.toFixed(2);
+
+            const modalSubtotal = document.getElementById("modalSubtotal");
+            const modalTax = document.getElementById("modalTax");
+            const modalTotal = document.getElementById("modalTotal");
+
+            if (modalSubtotal && modalTax && modalTotal) {
+                modalSubtotal.textContent = "$" + subtotal.toFixed(2);
+                modalTax.textContent = "$" + tax.toFixed(2);
+                modalTotal.textContent = "$" + total.toFixed(2);
+            }
         }
+
+        const checkoutModal = document.getElementById("checkoutModal");
+        const openCheckoutBtn = document.getElementById("openCheckoutBtn");
+        const closeCheckoutBtn = document.getElementById("closeCheckoutBtn");
+        const checkoutForm = document.getElementById("checkoutForm");
+
+        openCheckoutBtn.addEventListener("click", function () {
+            const cartItems = document.querySelectorAll(".cart-item");
+
+            if (cartItems.length === 0) {
+                alert("Your cart is empty.");
+                return;
+            }
+
+            updateCartTotals();
+            checkoutModal.classList.add("show");
+            document.body.classList.add("modal-open");
+        });
+
+        closeCheckoutBtn.addEventListener("click", function () {
+            checkoutModal.classList.remove("show");
+            document.body.classList.remove("modal-open");
+        });
+
+        checkoutModal.addEventListener("click", function (event) {
+            if (event.target === checkoutModal) {
+                checkoutModal.classList.remove("show");
+                document.body.classList.remove("modal-open");
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                checkoutModal.classList.remove("show");
+                document.body.classList.remove("modal-open");
+            }
+        });
 
         document.addEventListener("input", function(event) {
             if (event.target.classList.contains("qty-input")) {
@@ -215,6 +345,79 @@
                     updateCartTotals();
                 }
             }
+        });
+
+        document.getElementById("cardNumber").addEventListener("input", function() {
+            this.value = this.value.replace(/\D/g, "").slice(0, 16);
+        });
+
+        document.getElementById("cvv").addEventListener("input", function() {
+            this.value = this.value.replace(/\D/g, "").slice(0, 4);
+        });
+
+        document.getElementById("zip").addEventListener("input", function() {
+            this.value = this.value.replace(/\D/g, "").slice(0, 5);
+        });
+
+        document.getElementById("expDate").addEventListener("input", function() {
+            let value = this.value.replace(/\D/g, "").slice(0, 4);
+            if (value.length >= 3) {
+                this.value = value.slice(0, 2) + "/" + value.slice(2);
+            } else {
+                this.value = value;
+            }
+        });
+
+        checkoutForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const fullName = document.getElementById("fullName").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const address = document.getElementById("address").value.trim();
+            const city = document.getElementById("city").value.trim();
+            const state = document.getElementById("state").value.trim();
+            const zip = document.getElementById("zip").value.trim();
+            const cardName = document.getElementById("cardName").value.trim();
+            const cardNumber = document.getElementById("cardNumber").value.trim();
+            const expDate = document.getElementById("expDate").value.trim();
+            const cvv = document.getElementById("cvv").value.trim();
+
+            if (!fullName || !email || !address || !city || !state || !zip || !cardName || !cardNumber || !expDate || !cvv) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            if (!/^\d{5}$/.test(zip)) {
+                alert("ZIP code must be 5 digits.");
+                return;
+            }
+
+            if (!/^\d{16}$/.test(cardNumber)) {
+                alert("Card number must be exactly 16 digits.");
+                return;
+            }
+
+            if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expDate)) {
+                alert("Expiration date must be in MM/YY format.");
+                return;
+            }
+
+            if (!/^\d{3,4}$/.test(cvv)) {
+                alert("CVV must be 3 or 4 digits.");
+                return;
+            }
+
+            alert("Order placed successfully! This can later connect to a real payment system.");
+
+            checkoutModal.classList.remove("show");
+            document.body.classList.remove("modal-open");
+            checkoutForm.reset();
         });
 
         window.addEventListener("load", function() {
