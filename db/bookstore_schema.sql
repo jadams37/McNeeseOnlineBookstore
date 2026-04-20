@@ -71,6 +71,21 @@ CREATE TABLE IF NOT EXISTS cart_item (
     UNIQUE (cart_id, product_id)
 );
 
+CREATE TABLE IF NOT EXISTS wishlist (
+    wishlist_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID NOT NULL UNIQUE REFERENCES users_account(user_id) ON DELETE CASCADE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS wishlist_item (
+    wishlist_item_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    wishlist_id UUID NOT NULL UNIQUE REFERENCES wishlist(wishlist_id) ON DELETE CASCADE,
+    product_id UUID NOT NULL REFERENCES product(product_id) ON DELETE CASCADE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
 CREATE INDEX IF NOT EXISTS idx_product_title ON product(title);
 CREATE INDEX IF NOT EXISTS idx_product_isbn ON product(isbn);
 CREATE INDEX IF NOT EXISTS idx_orders_user_id ON orders(user_id);
