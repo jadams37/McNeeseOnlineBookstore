@@ -127,7 +127,7 @@ else {
                                             echo "<p class='item-name-label'>PRODUCT_TITLE</p>";
                                         endif; ?>
                                         <?php if (!empty($row['isbn'])): ?>
-                                            <p class="item-info-label"><?php echo htmlspecialchars($row['isbn']) ?></p>
+                                            <p class="item-info-label"><?php echo "ISBN:"?> <?php echo htmlspecialchars($row['isbn']) ?></p>
                                         <?php endif; ?>
                                         <?php if (!empty($row['author'])): ?>
                                             <p class="item-info-label"><?php echo htmlspecialchars($row['author']) ?></p>

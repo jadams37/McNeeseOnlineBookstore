@@ -16,30 +16,42 @@ const form = document.getElementById('signup');
 const button = document.getElementById('next');
 
 /* EventListener to validate the currently selected input */
-form.addEventListener('input', function(e) {
-    validateInput(e.target);
-})
+if(!form) {
+    alert("There was an issue loading the form. Please refresh.")
+}
+
+else {
+    form.addEventListener('input', function(e) {
+        validateInput(e.target);
+    })
+}
 
 function validateInput(input) {
-    let inputId = input.id;
-    let inputValue = input.value;
-    let errorMsg = document.getElementById('error-' + inputId);
-
-    /* Searches regexDictionary to find an id that matches the inputId
-       and store its associated value */
-    let regex = regexDictionary[inputId];
-
-    /* Display error message if input is invalid */
-    if(!regex.test(inputValue)) {
-        errorMsg.hidden = false;
-        return false;
-    }
-
+    if(!input) { return; }
     else {
-        errorMsg.hidden = true;
-        return true;
-    }
+        let inputId = input.id;
+        let inputValue = input.value;
+        let errorMsg = document.getElementById('error-' + inputId);
 
+        /* Searches regexDictionary to find an id that matches the inputId
+        and store its associated value */
+        let regex = regexDictionary[inputId];
+
+        /* Display error message if input is invalid */
+
+        if(!errorMsg) { return; }
+        else {
+            if(!regex.test(inputValue)) {
+                errorMsg.hidden = false;
+                return false;
+            }
+
+            else {
+                errorMsg.hidden = true;
+                return true;
+            }
+        }
+    }
 }
 
 function nextForm() {
@@ -48,11 +60,14 @@ function nextForm() {
        if the user tries to move to the next page or submit */
     const inputs = form.querySelectorAll('input:not([hidden])');
 
-    inputs.forEach(input => {
-        if(!validateInput(input)) {
-            isFormValid = false;
-        }
-    })
+    if(!inputs) { return; }
+    else {
+        inputs.forEach(input => {
+            if(!validateInput(input)) {
+                isFormValid = false;
+            }
+        })
+    }
 
     /* New form input and labels to show on the next page of the Signup */
     const newFormInput =
