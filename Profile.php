@@ -39,7 +39,7 @@ else {
         <div class="nav-head">
             <div class="nav-start">
                 <div class="logo">
-                    <a href="index.html" class="logo-label">McNeese Bookstore</a>
+                    <a href="homepage.html" class="logo-label">McNeese Bookstore</a>
                 </div>
             </div>
 
@@ -52,13 +52,13 @@ else {
             <div class="nav-end">
 
                 <div class="cart">
-                        <a href="" class="cart-label">Cart</a>
-                        <a href="" class="cart-icon"><img src="icons/cart.svg"></a>
+                        <a href="cart.html" class="cart-label">Cart</a>
+                        <a href="cart.html" class="cart-icon"><img src="icons/cart.svg"></a>
                     </div>
                     <div class="separator"></div>
                     <div class="profile">
-                        <a href="" class="profile-label">Profile</a>
-                        <a href="" class="profile-icon"><img src="icons/profile.svg"></a>
+                        <a href="Profile.php" class="profile-label">Profile</a>
+                        <a href="Profile.php" class="profile-icon"><img src="icons/profile.svg"></a>
                     </div>               
             </div>
         </div>

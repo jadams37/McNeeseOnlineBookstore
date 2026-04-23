@@ -55,7 +55,7 @@ else {
             <nav class="nav-head">
                 <div class="nav-start">
                     <div class="logo">
-                        <a class="logo-label" href="">McNeese Bookstore</a>
+                        <a class="logo-label" href="homepage.html">McNeese Bookstore</a>
                     </div>
                 </div>
                 <div class="nav-center">
@@ -68,13 +68,13 @@ else {
                 </div>
                 <div class="nav-end">
                     <div class="cart">
-                        <a href="" class="cart-label">Cart</a>
-                        <a href="" class="cart-icon"><img src="icons/cart.svg"></a>
+                        <a href="cart.html" class="cart-label">Cart</a>
+                        <a href="cart.html" class="cart-icon"><img src="icons/cart.svg"></a>
                     </div>
                     <div class="separator"></div>
                     <div class="profile">
-                        <a href="" class="profile-label">Profile</a>
-                        <a href="" class="profile-icon"><img src="icons/profile.svg"></a>
+                        <a href="Profile.php" class="profile-label">Profile</a>
+                        <a href="Profile.php" class="profile-icon"><img src="icons/profile.svg"></a>
                     </div>
                 </div>
             </nav>

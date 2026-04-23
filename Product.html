@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Page</title>
     <link rel="stylesheet" href="product.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search">
 </head>
 <body>
 
@@ -17,29 +18,25 @@
             </div>
 
             <div class="nav-center">
-                <div class="search">
-                    <span class="search-icon">⌕</span>
-                    <input class="search-input" type="text" placeholder="Search books, rentals, apparel...">
-                </div>
+                <form action="results.php" method="get">
+                    <div class="search">
+                        <span class="search-icon material-symbols-outlined">search</span>
+                        <input class="search-input" type="text" name="search" placeholder="Search">
+                    </div>
+                </form>
             </div>
 
             <div class="nav-end">
-                <div class="cart">
-                    <div class="cart-icon">
-                        <img src="cart.svg" alt="Cart">
+                    <div class="cart">
+                        <a href="cart.html" class="cart-label">Cart</a>
+                        <a href="cart.html" class="cart-icon"><img src="icons/cart.svg"></a>
                     </div>
-                    <a href="#" class="cart-label">Cart</a>
-                </div>
-
-                <div class="separator"></div>
-
-                <div class="profile">
-                    <div class="profile-icon">
-                        <img src="profile.svg" alt="Profile">
+                    <div class="separator"></div>
+                    <div class="profile">
+                        <a href="Profile.php" class="profile-label">Profile</a>
+                        <a href="Profile.php" class="profile-icon"><img src="icons/profile.svg"></a>
                     </div>
-                    <a href="#" class="profile-label">Profile</a>
                 </div>
-            </div>
         </div>
     </header>
 

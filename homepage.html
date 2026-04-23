@@ -9,6 +9,7 @@
   <title>McNeese Bookstore: Home</title>
 
   <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search">
 
   <style>
     :root {
@@ -510,25 +511,25 @@
       </div>
 
       <div class="nav-center">
-        <form action="results.html">
+        <form action="results.php" method="get">
           <div class="search">
-            <span class="search-icon">🔎</span>
-            <input class="search-input" type="search" name="q" placeholder="Search textbooks, supplies, and merch">
+            <span class="search-icon material-symbols-outlined">search</span>
+            <input class="search-input" type="text" name="search" placeholder="Search">
           </div>
         </form>
       </div>
 
       <div class="nav-end">
         <div class="cart">
-          <a href="#featured" class="cart-label">Featured</a>
-          <a href="#featured" class="cart-icon"><img src="icons/cart.svg" alt="Featured"></a>
+          <a href="cart.html" class="cart-label">Cart</a>
+          <a href="cart.html" class="cart-icon"><img src="icons/cart.svg" alt="Cart"></a>
         </div>
 
         <div class="separator"></div>
 
         <div class="profile">
-          <a href="login.html" class="profile-label">Login</a>
-          <a href="login.html" class="profile-icon"><img src="icons/profile.svg" alt="Login"></a>
+          <a href="Profile.php" class="profile-label">Profile</a>
+          <a href="Profile.php" class="profile-icon"><img src="icons/profile.svg" alt="Profile"></a>
         </div>
       </div>
     </nav>
@@ -585,7 +586,7 @@
             <h2 class="section-title">Browse Store Categories</h2>
             <p class="section-subtitle">A homepage section built around the bookstore theme while still matching the existing project style.</p>
           </div>
-          <a class="mini-btn" href="results.html">Open Results Page</a>
+          <a class="mini-btn" href="results.php">Browse Products</a>
         </div>
 
         <div class="category-grid">
