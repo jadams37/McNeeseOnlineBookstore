@@ -144,7 +144,7 @@
     height: 280px;
     width: 240px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     background-color: var(--content-bg-color);
     font-family: Questrial;
     font-size: var(--subtext-font-size);
@@ -156,13 +156,18 @@
 }
 
 .product-container img {
-    height: 128px;
-    width: 128px;
+    min-height: 128px;
+    min-width: 128px;
+    margin-top: 10%;
 }
 
-.product-container p, a {
+.product-container p {
+    max-width: 60%;
     margin: 0;
     line-height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .item-name-label, .item-price-label {
@@ -175,6 +180,7 @@
 }
 
 .cart-button {
+    margin-bottom: 10%;
     height: 32px;
     width: 100%;
     font-family: Questrial;
