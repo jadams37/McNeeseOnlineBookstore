@@ -176,7 +176,7 @@
 
 .cart-button {
     height: 32px;
-    width: 80%;
+    width: 100%;
     font-family: Questrial;
     font-weight: bold;
     font-size: var(--subtext-font-size);

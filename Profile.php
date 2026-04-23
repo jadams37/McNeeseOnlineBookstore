@@ -1,28 +1,3 @@
-<?php
-require 'db_connection.php';
-
-session_start();
-
-if(!isset($_SESSION['user_id'])) {
-    header("Location: login.html");
-    exit;
-}
-
-else {
-    $user_id = $_SESSION['user_id'];
-    
-    $sql = "SELECT * FROM wishlist
-            JOIN wishlist_item ON wishlist.wishlist_id = wishlist_item.wishlist_id
-            JOIN product on wishlist_item.product_id = product.product_id
-            WHERE wishlist.user_id = :user_id";
-
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(['user_id' => $user_id]);
-
-    $results = $stmt->fetchAll();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,27 +6,29 @@ else {
     <title>Profile</title>
 
     <link rel="stylesheet" href="Profile.css">
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search">
 </head>
 <body>
 
     <!-- Header -->
     <header>
-        <div class="nav-head">
-            <div class="nav-start">
-                <div class="logo">
-                    <a href="homepage.html" class="logo-label">McNeese Bookstore</a>
+            <nav class="nav-head">
+                <div class="nav-start">
+                    <div class="logo">
+                        <a class="logo-label" href="homepage.html">McNeese Bookstore</a>
+                    </div>
                 </div>
-            </div>
-
-            <div class="nav-center">
-                <div class="search">
-                    <input class="search-input" type="text" placeholder="Search for books...">
+                <div class="nav-center">
+                    <form action="results.php" method="get">
+                        <div class="search">
+                            <span class="search-icon material-symbols-outlined">search</span>
+                            <input class="search-input" type="text" name="search" placeholder="Search">
+                        </div>
+                    </form>
                 </div>
-            </div>
-
-            <div class="nav-end">
-
-                <div class="cart">
+                <div class="nav-end">
+                    <div class="cart">
                         <a href="cart.html" class="cart-label">Cart</a>
                         <a href="cart.html" class="cart-icon"><img src="icons/cart.svg"></a>
                     </div>
@@ -59,10 +36,10 @@ else {
                     <div class="profile">
                         <a href="Profile.php" class="profile-label">Profile</a>
                         <a href="Profile.php" class="profile-icon"><img src="icons/profile.svg"></a>
-                    </div>               
-            </div>
-        </div>
-    </header>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
     <!-- Main Content -->
     <article class="profile-page">
@@ -79,13 +56,12 @@ else {
                 <div class="profile-links">
                     <a href="#" class="profile-link active-link">Account Info</a>
                     <a href="#" class="profile-link">Orders</a>
-                    <a href="#" class="profile-link">Wishlist</a>
                     <a href="#" class="profile-link">Settings</a>
                 </div>
             </div>
 
             <div class="profile-right">
-                <div class="info-box" hidden>
+                <div class="info-box">
                     <h1 class="section-title">My Profile</h1>
 
                     <div class="info-row">
@@ -122,7 +98,7 @@ else {
                     <button class="save-button">Save Changes</button>
                 </div>
 
-                <div class="info-box" hidden>
+                <div class="info-box">
                     <h2 class="section-subtitle">Recent Orders</h2>
 
                     <div class="order-item">
@@ -137,21 +113,6 @@ else {
                         <p>Status: Shipped</p>
                     </div>
                 </div>
-
-                <div class="info-box">
-                    <h2 class="section-subtitle">Wishlist</h2>
-                    <?php if(!empty($results)):
-                        foreach ($results as $row): ?>
-                            <div class="order-item">
-                                <p><strong><?php echo htmlspecialchars($row['title']) ?></strong></p>
-                                <p><?php echo htmlspecialchars($row['isbn']) ?></p>
-                                <p><?php echo htmlspecialchars($row['price']) ?></p>
-                            </div>
-                        <?php endforeach;
-                        else:
-                            echo "<p>You haven't wishlisted any products yet.</p>";
-                    endif ?>;
-                </div>
             </div>
 
         </div>
@@ -159,31 +120,27 @@ else {
 
     <!-- Footer -->
     <footer>
-        <div class="nav-foot">
-            <div class="foot-start">
-                <div class="contact">
-                    <a href="contact.html" class="contact-label">Contact</a>
-                    <span class="contact-subtext">(337) 555-1234</span>
-                    <span class="contact-subtext">support@bookstore.com</span>
+            <nav class="nav-foot">
+                <div class="foot-start">
+                    <div class="contact">
+                        <a class="contact-label" href="">Contact Us</a>
+                        <a class="contact-subtext" href="">Having issues with your order? Have any questions?<br>Please reach out to us if so.</a>
+                    </div>
                 </div>
-            </div>
-
-            <div class="foot-center">
-                <span class="hours-label">Hours</span>
-                <span class="hours-subtext">Mon - Fri: 8 AM - 5 PM</span>
-                <span class="hours-subtext">Sat: 9 AM - 2 PM</span>
-            </div>
-
-            <div class="foot-end">
-                <span class="social-label">Socials</span>
-                <div class="social-links">
-                    <a href="#" class="social-icon"><img src="icons/facebook.png" alt="Facebook"></a>
-                    <a href="#" class="social-icon"><img src="icons/instagram.png" alt="Instagram"></a>
-                    <a href="#" class="social-icon"><img src="icons/tiktok.png" alt="TikTok"></a>
+                <div class="foot-center">
+                    <a class="hours-label">Store Hours</a>
+                    <a class="hours-subtext">Monday - Wednesday: 7:30 AM - 5:00 PM<br>Thursday: 7:30 AM - 6:00 PM<br>Friday: 7:30 AM - 11:30 AM</a>
                 </div>
-            </div>
-        </div>
-    </footer>
+                <div class="foot-end">
+                    <a class="social-label">Follow Us</a>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com" class="social-icon"><img src="icons/facebook.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com" class="social-icon"><img src="icons/instagram.png" alt="Instagram"></a>
+                        <a href="https://www.tiktok.com" class="social-icon"><img src="icons/tiktok.png" alt="TikTok"></a>
+                    </div>
+                </div>
+            </nav>
+        </footer>
 
 </body>
 </html>
