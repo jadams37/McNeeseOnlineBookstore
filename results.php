@@ -46,7 +46,6 @@ else {
         <link rel="stylesheet" href="css/shared.css">
         <link rel="stylesheet" href="css/results.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search">
-        <script src="scripts/add-to-wishlist.js" defer></script>
         <script src="scripts/sort-results.js" defer></script>
     </head>
     <body>
@@ -121,13 +120,26 @@ else {
                                 foreach ($results as $row): ?>
                                     <div class="product-container">
                                         <img src="">
-                                        <p class="item-name-label"><?php echo htmlspecialchars($row['title']) ?></p>
-                                        <p class="item-info-label"><?php echo htmlspecialchars($row['isbn']) ?></p>
-                                        <p class="item-info-label"><?php echo htmlspecialchars($row['author']) ?></p>
-                                        <p class="item-price-label">$<?php echo htmlspecialchars($row['price']) ?> (<?php echo htmlspecialchars($row['condition']) ?>)</p>
+                                        <?php if (!empty($row['title'])): ?>
+                                            <p class="item-name-label"><?php echo htmlspecialchars($row['title']) ?></p>
+                                        <?php
+                                        else:
+                                            echo "<p class='item-name-label'>PRODUCT_TITLE</p>";
+                                        endif; ?>
+                                        <?php if (!empty($row['isbn'])): ?>
+                                            <p class="item-info-label"><?php echo htmlspecialchars($row['isbn']) ?></p>
+                                        <?php endif; ?>
+                                        <?php if (!empty($row['author'])): ?>
+                                            <p class="item-info-label"><?php echo htmlspecialchars($row['author']) ?></p>
+                                        <?php endif; ?>
+                                        <?php if (!empty($row['price']) && !empty($row['condition'])): ?>
+                                            <p class="item-price-label">$<?php echo htmlspecialchars($row['price']) ?> (<?php echo htmlspecialchars($row['condition']) ?>)</p>
+                                        <?php
+                                        else:
+                                            echo "<p class='item-price-label'>PRODUCT_PRICE</p>";
+                                        endif; ?>
                                         <div class="item-buttons">
                                             <button class="cart-button">Add to Cart</button>
-                                            <button class="wishlist-button" id="wishlist"></button>
                                         </div>
                                     </div>
                                 <?php endforeach;
@@ -155,9 +167,9 @@ else {
                 <div class="foot-end">
                     <a class="social-label">Follow Us</a>
                     <div class="social-links">
-                        <a href="https://www.facebook.com" class="social-icon"><img src="icons/facebook.png"></a>
-                        <a href="https://www.instagram.com" class="social-icon"><img src="icons/instagram.png"></a>
-                        <a href="https://www.tiktok.com" class="social-icon"><img src="icons/tiktok.png"></a>
+                        <a href="https://www.facebook.com" class="social-icon"><img src="icons/facebook.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com" class="social-icon"><img src="icons/instagram.png" alt="Instagram"></a>
+                        <a href="https://www.tiktok.com" class="social-icon"><img src="icons/tiktok.png" alt="TikTok"></a>
                     </div>
                 </div>
             </nav>
