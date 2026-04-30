@@ -7,10 +7,18 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
 
     const loadCart = async () => {
+        const token = localStorage.getItem('authToken');
+
+        if (!token) {
+            cartItemsEl.innerHTML = '<p>Please log in to view your cart.</p>';
+            cartSummaryEl.innerHTML = '';
+            return;
+        }
+
         try {
             const response = await fetch('/cart', {
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                    'Authorization': `Bearer ${token}`
                 }
             });
 
@@ -32,25 +40,29 @@ window.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
 
-            cartItemsEl.innerHTML = cart.items.map(item => `
-                <div class="cart-item" data-item-id="${item.cart_item_id}">
-                    <div class="item-details">
-                        <h3>${item.title}</h3>
-                        <p>Author: ${item.author || 'N/A'}</p>
-                        <p>Price: $${Number(item.price).toFixed(2)}</p>
-                        <p>Stock: ${item.quantity_in_stock}</p>
+            cartItemsEl.innerHTML = cart.items.map(item => {
+                const itemImagePath = item.image_path || 'images/placeholder.jpg';
+                return `
+                    <div class="cart-item" data-item-id="${item.cart_item_id}">
+                        <img src="${itemImagePath}" alt="${item.title}" class="cart-item-image">
+                        <div class="item-details">
+                            <h3>${item.title}</h3>
+                            <p>Author: ${item.author || 'N/A'}</p>
+                            <p>Price: $${Number(item.price).toFixed(2)}</p>
+                            <p>Stock: ${item.quantity_in_stock}</p>
+                        </div>
+                        <div class="item-controls">
+                            <button class="quantity-btn" onclick="changeQuantity('${item.cart_item_id}', -1)">-</button>
+                            <span class="quantity">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="changeQuantity('${item.cart_item_id}', 1)">+</button>
+                            <button class="remove-btn" onclick="removeItem('${item.cart_item_id}')">Remove</button>
+                        </div>
+                        <div class="item-total">
+                            <p>Total: $${Number(item.line_total).toFixed(2)}</p>
+                        </div>
                     </div>
-                    <div class="item-controls">
-                        <button class="quantity-btn" onclick="changeQuantity('${item.cart_item_id}', -1)">-</button>
-                        <span class="quantity">${item.quantity}</span>
-                        <button class="quantity-btn" onclick="changeQuantity('${item.cart_item_id}', 1)">+</button>
-                        <button class="remove-btn" onclick="removeItem('${item.cart_item_id}')">Remove</button>
-                    </div>
-                    <div class="item-total">
-                        <p>Total: $${Number(item.line_total).toFixed(2)}</p>
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
 
             cartSummaryEl.innerHTML = `
                 <h3>Order Summary</h3>
@@ -66,9 +78,17 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     window.changeQuantity = async (itemId, delta) => {
         const itemEl = document.querySelector(`[data-item-id="${itemId}"]`);
+        if (!itemEl) {
+            return;
+        }
+
         const quantityEl = itemEl.querySelector('.quantity');
-        let currentQty = parseInt(quantityEl.textContent);
-        let newQty = currentQty + delta;
+        if (!quantityEl) {
+            return;
+        }
+
+        const currentQty = parseInt(quantityEl.textContent, 10);
+        const newQty = currentQty + delta;
 
         if (newQty < 0) return;
 

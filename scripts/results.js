@@ -11,6 +11,88 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const url = new URL(window.location.href);
 
+    // Initialize wishlist hearts with current state
+    const initializeWishlistHearts = async () => {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            return; // User not logged in, hearts stay empty
+        }
+
+        try {
+            const response = await fetch('/wishlist', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            if (!response.ok) {
+                return;
+            }
+
+            const { wishlist } = await response.json();
+            const wishlistProductIds = new Set(wishlist.map(item => item.product_id));
+
+            document.querySelectorAll('.wishlist-heart').forEach(heart => {
+                const productId = heart.getAttribute('data-product-id');
+                if (wishlistProductIds.has(productId)) {
+                    heart.classList.add('in-wishlist');
+                    heart.textContent = '♥';
+                }
+
+                heart.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    await toggleWishlist(productId, heart);
+                });
+            });
+        } catch (error) {
+            console.error('Failed to initialize wishlist hearts:', error);
+        }
+    };
+
+    const toggleWishlist = async (productId, heartElement) => {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            alert('Please log in to add items to your wishlist');
+            return;
+        }
+
+        try {
+            const isInWishlist = heartElement.classList.contains('in-wishlist');
+
+            if (isInWishlist) {
+                const response = await fetch(`/wishlist/items/${productId}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to remove from wishlist');
+                }
+
+                heartElement.classList.remove('in-wishlist');
+                heartElement.textContent = '♡';
+            } else {
+                const response = await fetch('/wishlist/items', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ productId })
+                });
+
+                if (!response.ok) {
+                    const data = await response.json();
+                    throw new Error(data.message || 'Failed to add to wishlist');
+                }
+
+                heartElement.classList.add('in-wishlist');
+                heartElement.textContent = '♥';
+            }
+        } catch (error) {
+            alert(error.message || 'Unable to update wishlist');
+        }
+    };
+
     const buildParams = () => {
         const params = new URLSearchParams();
 
@@ -64,17 +146,25 @@ window.addEventListener('DOMContentLoaded', () => {
                 .filter(Boolean)
                 .join(' | ');
 
+            const imagePath = product.image_path || 'images/placeholder.jpg';
             return `
                 <div class="product">
+                    <img src="${imagePath}" alt="${product.title}" class="product-image">
                     <p class="product-title">${product.title || 'Untitled Product'}</p>
                     <p class="product-detail">${details || 'No additional details'}</p>
-                    <p class="product-price">$${price}</p>
+                    <div class="product-footer">
+                        <p class="product-price">$${price}</p>
+                        <button class="wishlist-heart" data-product-id="${product.product_id}" title="Add to wishlist">♡</button>
+                    </div>
                     <a class="product-link" href="Product.html?id=${product.product_id}">View Product</a>
                 </div>
             `;
         });
 
         productsContainer.innerHTML = cards.join('');
+
+        // Initialize wishlist hearts
+        initializeWishlistHearts();
     };
 
     const loadProducts = async () => {

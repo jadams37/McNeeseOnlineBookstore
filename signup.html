@@ -37,7 +37,8 @@
                                 <label for="username" class="username-label">Username</label><br>
                                 <input class="username-input" id="username" type="text" name="username" required><br>
                                 <label for="password" class="password-label">Password</label><br>
-                                <input class="password-input" id="password" type="password" name="password" required><br>
+                                <input class="password-input" id="password" type="password" name="password" minlength="8" pattern="(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}" title="Password must be at least 8 characters and include a number and special character." required><br>
+                                <small class="password-help">Use at least 8 characters, including 1 number and 1 special character.</small><br>
                             </form>
                             <button class="next-button" id="next" type="button">Next</button>
                             <p id="signup-message"></p>

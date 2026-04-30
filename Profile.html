@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/Profile.css">
     <script src="scripts/profile.js" defer></script>
     <script src="scripts/auth-nav.js" defer></script>
+    <script src="scripts/search-nav.js" defer></script>
 </head>
 <body>
 
@@ -17,7 +18,7 @@
         <div class="nav-head">
             <div class="nav-start">
                 <div class="logo">
-                    <a href="homepage.html" class="logo-label">McNeese BookStore</a>
+                    <a href="homepage.html" class="logo-label">McNeese Bookstore</a>
                 </div>
             </div>
 
@@ -35,8 +36,10 @@
                     </div>
                     <div class="separator"></div>
                     <div class="profile">
-                        <a href="" class="profile-label">Profile</a>
-                        <a href="" class="profile-icon"><img src="icons/profile.svg" alt="Profile"></a>
+                        <a href="Profile.html" class="profile-link profile-label">
+                            <span class="profile-text">Profile</span>
+                            <span class="profile-icon"><img src="icons/profile.svg" alt="Profile"></span>
+                        </a>
                     </div>               
             </div>
         </div>
@@ -48,17 +51,16 @@
 
             <div class="profile-left">
                 <div class="profile-card">
-                    <img src="images/user.jpg" alt="User" class="user-image">
+                    <div class="profile-image-container">
+                        <img src="icons/profile.svg" alt="User" class="user-image" id="profile-image">
+                        <div class="image-upload-overlay">
+                            <span class="upload-text">Change Photo</span>
+                        </div>
+                        <input type="file" id="profile-picture-input" accept="image/*" style="display: none;">
+                    </div>
                     <h2 class="user-name">Evan Robertson</h2>
                     <p class="user-email">erobertson2@mcneese.edu</p>
                     <button class="edit-button">Edit Profile</button>
-                </div>
-
-                <div class="profile-links">
-                    <a href="#" class="profile-link active-link">Account Info</a>
-                    <a href="#" class="profile-link">Orders</a>
-                    <a href="#" class="profile-link">Wishlist</a>
-                    <a href="#" class="profile-link">Settings</a>
                 </div>
             </div>
 
@@ -116,6 +118,13 @@
                         <p>Status: Shipped</p>
                     </div>
                 </div>
+
+                <div class="info-box">
+                    <h2 class="section-subtitle">My Wishlist</h2>
+                    <div id="wishlist-container" class="wishlist-container">
+                        <p class="loading-message">Loading wishlist...</p>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -126,7 +135,7 @@
         <div class="nav-foot">
             <div class="foot-start">
                 <div class="contact">
-                    <a href="contact.html" class="contact-label">Contact</a>
+                    <a href="mailto:support@mcneesebookstore.edu" class="contact-label">Contact</a>
                     <span class="contact-subtext">(337) 555-1234</span>
                     <span class="contact-subtext">support@bookstore.com</span>
                 </div>
@@ -141,9 +150,9 @@
             <div class="foot-end">
                 <span class="social-label">Socials</span>
                 <div class="social-links">
-                    <a href="#" class="social-icon"><img src="images/facebook.svg" alt="Facebook"></a>
-                    <a href="#" class="social-icon"><img src="images/instagram.svg" alt="Instagram"></a>
-                    <a href="#" class="social-icon"><img src="images/twitter.svg" alt="Twitter"></a>
+                    <a href="https://www.facebook.com" class="social-icon"><img src="icons/facebook.png" alt="Facebook"></a>
+                    <a href="https://www.instagram.com" class="social-icon"><img src="icons/instagram.png" alt="Instagram"></a>
+                    <a href="https://www.tiktok.com" class="social-icon"><img src="icons/tiktok.png" alt="TikTok"></a>
                 </div>
             </div>
         </div>

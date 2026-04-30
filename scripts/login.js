@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (existingToken) {
         verifyToken(existingToken).then((isValid) => {
             if (isValid) {
-                window.location.href = 'results.html';
+                window.location.href = 'homepage.html';
                 return;
             }
 
@@ -78,7 +78,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             renderMessage('Login successful. Redirecting...');
             setTimeout(() => {
-                window.location.href = 'results.html';
+                window.location.href = 'homepage.html';
             }, 1000);
         } catch (error) {
             renderMessage(error.message || 'Unable to login right now.', true);

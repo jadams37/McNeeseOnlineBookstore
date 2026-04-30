@@ -29,7 +29,7 @@
             <nav class="nav-head">
                 <div class="nav-start">
                     <div class="logo">
-                        <a class="logo-label" href="">McNeese Bookstore</a>
+                        <a class="logo-label" href="homepage.html">McNeese Bookstore</a>
                     </div>
                 </div>
                 <div class="nav-center">
@@ -43,12 +43,14 @@
                 <div class="nav-end">
                     <div class="cart">
                         <a href="cart.html" class="cart-label">Cart</a>
-                        <a href="cart.html" class="cart-icon"><img src="icons/cart.svg"></a>
+                        <a href="cart.html" class="cart-icon"><img src="icons/cart.svg" alt="Cart"></a>
                     </div>
                     <div class="separator"></div>
                     <div class="profile">
-                        <a href="Profile.html" class="profile-label">Profile</a>
-                        <a href="Profile.html" class="profile-icon"><img src="icons/profile.svg"></a>
+                        <a href="Profile.html" class="profile-link profile-label">
+                            <span class="profile-text">Profile</span>
+                            <span class="profile-icon"><img src="icons/profile.svg" alt="Profile"></span>
+                        </a>
                     </div>
                 </div>
             </nav>
@@ -82,12 +84,18 @@
                                 <input class="filter-input" id="books" type="checkbox" name="category" value="books">
                                 <label for="books" class="filter-input-label">Books</label><br>
                                 <input class="filter-input" id="supplies" type="checkbox" name="category" value="supplies">
-                                <label for="supplies" class="filter-input-label">Supplies</label>
+                                <label for="supplies" class="filter-input-label">Supplies</label><br>
+                                <input class="filter-input" id="apparel" type="checkbox" name="category" value="apparel">
+                                <label for="apparel" class="filter-input-label">Apparel</label><br>
+                                <input class="filter-input" id="electronics" type="checkbox" name="category" value="electronics">
+                                <label for="electronics" class="filter-input-label">Electronics</label><br>
                                 <p class="filter-type">Condition</p>
                                 <input class="filter-input" id="new" type="checkbox" name="condition" value="new">
                                 <label for="new" class="filter-input-label">New</label><br>
                                 <input class="filter-input" id="used" type="checkbox" name="condition" value="used">
-                                <label for="used" class="filter-input-label">Used</label>
+                                <label for="used" class="filter-input-label">Used</label><br>
+                                <input class="filter-input" id="rental" type="checkbox" name="condition" value="rental">
+                                <label for="rental" class="filter-input-label">Rental</label>
                             </form>
                         </div>
                         <div id="products-container" class="products-container">
@@ -101,8 +109,8 @@
             <nav class="nav-foot">
                 <div class="foot-start">
                     <div class="contact">
-                        <a class="contact-label" href="">Contact Us</a>
-                        <a class="contact-subtext" href="">Having issues with your order? Have any questions?<br>Please reach out to us if so.</a>
+                        <a class="contact-label" href="mailto:support@mcneesebookstore.edu">Contact Us</a>
+                        <a class="contact-subtext" href="mailto:support@mcneesebookstore.edu">Having issues with your order? Have any questions?<br>Please reach out to us if so.</a>
                     </div>
                 </div>
                 <div class="foot-center">

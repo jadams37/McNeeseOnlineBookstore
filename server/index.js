@@ -5,6 +5,10 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const path = require('path');
+const fs = require('fs');
+const multer = require('multer');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 const pool = require('./db');
 
 const app = express();
@@ -12,9 +16,46 @@ const port = Number(process.env.PORT || 3000);
 const jwtSecret = process.env.JWT_SECRET || 'dev-only-change-me';
 const jwtExpiresIn = process.env.JWT_EXPIRES_IN || '1h';
 
+// Create uploads directory if it doesn't exist
+const uploadsDir = path.join(__dirname, '..', 'uploads', 'profile-pictures');
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+// Configure multer for profile picture uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, uploadsDir);
+    },
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        const ext = path.extname(file.originalname);
+        cb(null, `profile-${req.user.userId}-${uniqueSuffix}${ext}`);
+    }
+});
+
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 5 * 1024 * 1024 // 5MB limit
+    },
+    fileFilter: (req, file, cb) => {
+        const allowedTypes = /jpeg|jpg|png|gif|webp/;
+        const ext = path.extname(file.originalname).toLowerCase();
+        const mimeType = allowedTypes.test(file.mimetype);
+        const extname = allowedTypes.test(ext);
+
+        if (mimeType && extname) {
+            return cb(null, true);
+        }
+        cb(new Error('Only image files are allowed (jpeg, jpg, png, gif, webp)'));
+    }
+});
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..')));
+app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 app.get('/', (_req, res) => {
     res.redirect('/login.html');
@@ -40,6 +81,12 @@ const createAuthToken = (user) => jwt.sign(
     { expiresIn: jwtExpiresIn }
 );
 
+const isValidPassword = (password) => (
+    password.length >= 8
+    && /\d/.test(password)
+    && /[^A-Za-z0-9]/.test(password)
+);
+
 const requireAuth = (req, res, next) => {
     const authorization = req.headers.authorization || '';
     const [scheme, token] = authorization.split(' ');
@@ -62,6 +109,74 @@ const requireAuth = (req, res, next) => {
     }
 };
 
+// Encryption function for card data
+const encryptCardData = (cardData) => {
+    const algorithm = 'aes-256-cbc';
+    const key = crypto.scryptSync(jwtSecret, 'salt', 32);
+    const iv = crypto.randomBytes(16);
+    
+    const cipher = crypto.createCipheriv(algorithm, key, iv);
+    let encrypted = cipher.update(cardData, 'utf8', 'hex');
+    encrypted += cipher.final('hex');
+    
+    return `${iv.toString('hex')}:${encrypted}`;
+};
+
+// Configure nodemailer
+const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT),
+    secure: false,
+    auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS
+    }
+});
+
+// Email sending function
+const sendOrderEmail = async (orderData) => {
+    const itemsList = orderData.items.map(item => 
+        `${item.title} (x${item.quantity}) - $${Number(item.line_total).toFixed(2)}`
+    ).join('\n');
+    
+    const mailOptions = {
+        from: process.env.ORDER_EMAIL_FROM,
+        to: process.env.ORDER_REVIEW_EMAIL,
+        subject: `New Order #${orderData.orderId}`,
+        text: `
+New Order Received
+
+Order ID: ${orderData.orderId}
+Customer: ${orderData.customerName}
+Email: ${orderData.customerEmail}
+
+Items:
+${itemsList}
+
+Subtotal: $${Number(orderData.subtotal).toFixed(2)}
+Tax (8.25%): $${Number(orderData.taxAmount).toFixed(2)}
+Total: $${Number(orderData.total).toFixed(2)}
+
+Shipping Address:
+${orderData.shippingName}
+${orderData.shippingAddress}
+${orderData.shippingCity}, ${orderData.shippingState} ${orderData.shippingZip}
+
+Billing Address:
+${orderData.billingName}
+${orderData.billingAddress}
+${orderData.billingCity}, ${orderData.billingState} ${orderData.billingZip}
+
+Encrypted Card Information:
+${orderData.encryptedCard}
+
+Card Name: ${orderData.cardName}
+        `
+    };
+    
+    await transporter.sendMail(mailOptions);
+};
+
 app.post('/auth/register', async (req, res) => {
     const {
         email,
@@ -75,6 +190,14 @@ app.post('/auth/register', async (req, res) => {
     if (!email || !username || !password || !fullName) {
         return res.status(400).json({
             message: 'Email, username, password, and full name are required.'
+        });
+    }
+
+    const plainPassword = String(password);
+
+    if (!isValidPassword(plainPassword)) {
+        return res.status(400).json({
+            message: 'Password must be at least 8 characters long and include a number and a special character.'
         });
     }
 
@@ -100,7 +223,7 @@ app.post('/auth/register', async (req, res) => {
             return res.status(409).json({ message: 'Email or username is already in use.' });
         }
 
-        const passwordHash = await bcrypt.hash(password, 12);
+        const passwordHash = await bcrypt.hash(plainPassword, 12);
 
         const created = await pool.query(
             `INSERT INTO users_account (
@@ -201,7 +324,15 @@ app.get('/products', async (req, res) => {
 
     if (search) {
         values.push(`%${search}%`);
-        where.push(`(p.title ILIKE $${values.length} OR p.author ILIKE $${values.length} OR p.sku ILIKE $${values.length} OR p.isbn ILIKE $${values.length})`);
+        where.push(`(
+            p.title ILIKE $${values.length}
+            OR p.author ILIKE $${values.length}
+            OR p.sku ILIKE $${values.length}
+            OR p.isbn ILIKE $${values.length}
+            OR p.publisher ILIKE $${values.length}
+            OR p.edition ILIKE $${values.length}
+            OR c.name ILIKE $${values.length}
+        )`);
     }
 
     if (condition) {
@@ -236,6 +367,7 @@ app.get('/products', async (req, res) => {
                 p.condition,
                 p.price,
                 p.quantity_in_stock,
+                p.image_path,
                 c.name AS category_name
              FROM product p
              LEFT JOIN category c ON c.category_id = p.category_id
@@ -267,6 +399,7 @@ app.get('/products/:productId', async (req, res) => {
                 p.condition,
                 p.price,
                 p.quantity_in_stock,
+                p.image_path,
                 c.name AS category_name,
                 p.created_at,
                 p.updated_at
@@ -299,6 +432,7 @@ app.get('/profile/me', requireAuth, async (req, res) => {
                 last_name,
                 physical_address,
                 phone_number,
+                profile_picture_url,
                 role,
                 created_at
              FROM users_account
@@ -351,6 +485,56 @@ app.put('/profile/me', requireAuth, async (req, res) => {
     }
 });
 
+app.post('/profile/picture', requireAuth, upload.single('profilePicture'), async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ message: 'No file uploaded.' });
+        }
+
+        // Generate URL path for the uploaded file
+        const profilePictureUrl = `/uploads/profile-pictures/${req.file.filename}`;
+
+        // Get old profile picture to delete it
+        const oldPicture = await pool.query(
+            'SELECT profile_picture_url FROM users_account WHERE user_id = $1',
+            [req.user.userId]
+        );
+
+        // Update database with new profile picture URL
+        const result = await pool.query(
+            `UPDATE users_account
+             SET profile_picture_url = $1
+             WHERE user_id = $2
+             RETURNING profile_picture_url`,
+            [profilePictureUrl, req.user.userId]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ message: 'User not found.' });
+        }
+
+        // Delete old profile picture file if it exists
+        if (oldPicture.rows[0]?.profile_picture_url) {
+            const oldFilePath = path.join(__dirname, '..', oldPicture.rows[0].profile_picture_url);
+            if (fs.existsSync(oldFilePath)) {
+                fs.unlinkSync(oldFilePath);
+            }
+        }
+
+        return res.status(200).json({
+            message: 'Profile picture updated successfully.',
+            profilePictureUrl: profilePictureUrl
+        });
+    } catch (error) {
+        console.error('Profile picture upload error:', error);
+        // Clean up uploaded file if database update fails
+        if (req.file && fs.existsSync(req.file.path)) {
+            fs.unlinkSync(req.file.path);
+        }
+        return res.status(500).json({ message: 'Unable to upload profile picture right now.' });
+    }
+});
+
 const getOrCreateCart = async (userId) => {
     let result = await pool.query('SELECT cart_id FROM cart WHERE user_id = $1', [userId]);
     if (result.rowCount > 0) {
@@ -374,6 +558,7 @@ app.get('/cart', requireAuth, async (req, res) => {
                 p.author,
                 p.price,
                 p.quantity_in_stock,
+                p.image_path,
                 (ci.quantity * p.price) AS line_total
              FROM cart_item ci
              JOIN product p ON p.product_id = ci.product_id
@@ -507,6 +692,211 @@ app.delete('/cart/items/:itemId', requireAuth, async (req, res) => {
     } catch (error) {
         console.error('Remove cart item error:', error);
         return res.status(500).json({ message: 'Unable to remove item from cart right now.' });
+    }
+});
+
+// Checkout endpoint
+app.post('/checkout', requireAuth, async (req, res) => {
+    const userId = req.user.userId;
+    const {
+        cardNumber,
+        cardCvv,
+        cardExpiry,
+        cardName,
+        billingName,
+        billingEmail,
+        billingAddress,
+        billingCity,
+        billingState,
+        billingZip,
+        shippingName,
+        shippingAddress,
+        shippingCity,
+        shippingState,
+        shippingZip
+    } = req.body;
+
+    try {
+        // Get cart items
+        const cartId = await getOrCreateCart(userId);
+        const cartResult = await pool.query(
+            `SELECT
+                ci.cart_item_id,
+                ci.product_id,
+                ci.quantity,
+                p.title,
+                p.price,
+                (p.price * ci.quantity) as line_total
+             FROM cart_item ci
+             JOIN product p ON ci.product_id = p.product_id
+             WHERE ci.cart_id = $1`,
+            [cartId]
+        );
+
+        const items = cartResult.rows;
+
+        if (items.length === 0) {
+            return res.status(400).json({ message: 'Cart is empty.' });
+        }
+
+        // Calculate totals
+        const subtotal = items.reduce((sum, item) => sum + Number(item.line_total), 0);
+        const taxRate = 0.0825;
+        const taxAmount = subtotal * taxRate;
+        const total = subtotal + taxAmount;
+
+        // Create order
+        const orderResult = await pool.query(
+            `INSERT INTO orders (user_id, status, subtotal, tax_amount, total_amount)
+             VALUES ($1, $2, $3, $4, $5)
+             RETURNING order_id`,
+            [userId, 'pending', subtotal, taxAmount, total]
+        );
+        const orderId = orderResult.rows[0].order_id;
+
+        // Create order items
+        for (const item of items) {
+            await pool.query(
+                `INSERT INTO order_item (order_id, product_id, quantity, unit_price, line_total)
+                 VALUES ($1, $2, $3, $4, $5)`,
+                [orderId, item.product_id, item.quantity, item.price, item.line_total]
+            );
+        }
+
+        // Encrypt card data
+        const cardData = `Card: ${cardNumber} | CVV: ${cardCvv} | Expiry: ${cardExpiry}`;
+        const encryptedCard = encryptCardData(cardData);
+
+        // Send email
+        await sendOrderEmail({
+            orderId,
+            items,
+            subtotal,
+            taxAmount,
+            total,
+            encryptedCard,
+            cardName,
+            customerName: billingName,
+            customerEmail: billingEmail,
+            billingName,
+            billingAddress,
+            billingCity,
+            billingState,
+            billingZip,
+            shippingName,
+            shippingAddress,
+            shippingCity,
+            shippingState,
+            shippingZip
+        });
+
+        // Clear cart
+        await pool.query('DELETE FROM cart_item WHERE cart_id = $1', [cartId]);
+
+        return res.status(200).json({
+            message: 'Order placed successfully',
+            orderId
+        });
+    } catch (error) {
+        console.error('Checkout error:', error);
+        return res.status(500).json({ message: 'Unable to process order right now.' });
+    }
+});
+
+// Wishlist endpoints
+const getOrCreateWishlist = async (userId) => {
+    let result = await pool.query('SELECT wishlist_id FROM wishlist WHERE user_id = $1', [userId]);
+    if (result.rowCount > 0) {
+        return result.rows[0].wishlist_id;
+    }
+    result = await pool.query('INSERT INTO wishlist (user_id) VALUES ($1) RETURNING wishlist_id', [userId]);
+    return result.rows[0].wishlist_id;
+};
+
+app.get('/wishlist', requireAuth, async (req, res) => {
+    const userId = req.user.userId;
+
+    try {
+        const wishlistId = await getOrCreateWishlist(userId);
+        const result = await pool.query(
+            `SELECT
+                wi.wishlist_item_id,
+                wi.added_at,
+                p.product_id,
+                p.title,
+                p.author,
+                p.price,
+                p.condition,
+                p.quantity_in_stock,
+                p.image_path,
+                c.name AS category_name
+             FROM wishlist_item wi
+             JOIN product p ON p.product_id = wi.product_id
+             LEFT JOIN category c ON c.category_id = p.category_id
+             WHERE wi.wishlist_id = $1
+             ORDER BY wi.added_at DESC`,
+            [wishlistId]
+        );
+
+        return res.status(200).json({ wishlist: result.rows });
+    } catch (error) {
+        console.error('Wishlist view error:', error);
+        return res.status(500).json({ message: 'Unable to load wishlist right now.' });
+    }
+});
+
+app.post('/wishlist/items', requireAuth, async (req, res) => {
+    const userId = req.user.userId;
+    const { productId } = req.body;
+
+    if (!productId) {
+        return res.status(400).json({ message: 'Product ID required.' });
+    }
+
+    try {
+        const wishlistId = await getOrCreateWishlist(userId);
+
+        // Check if item already in wishlist
+        const existing = await pool.query(
+            'SELECT wishlist_item_id FROM wishlist_item WHERE wishlist_id = $1 AND product_id = $2',
+            [wishlistId, productId]
+        );
+
+        if (existing.rowCount > 0) {
+            return res.status(409).json({ message: 'Item already in wishlist.' });
+        }
+
+        await pool.query(
+            'INSERT INTO wishlist_item (wishlist_id, product_id) VALUES ($1, $2)',
+            [wishlistId, productId]
+        );
+
+        return res.status(201).json({ message: 'Item added to wishlist.' });
+    } catch (error) {
+        console.error('Add to wishlist error:', error);
+        return res.status(500).json({ message: 'Unable to add item to wishlist right now.' });
+    }
+});
+
+app.delete('/wishlist/items/:productId', requireAuth, async (req, res) => {
+    const userId = req.user.userId;
+    const { productId } = req.params;
+
+    try {
+        const wishlistId = await getOrCreateWishlist(userId);
+        const result = await pool.query(
+            'DELETE FROM wishlist_item WHERE wishlist_id = $1 AND product_id = $2',
+            [wishlistId, productId]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ message: 'Item not in wishlist.' });
+        }
+
+        return res.status(200).json({ message: 'Item removed from wishlist.' });
+    } catch (error) {
+        console.error('Remove from wishlist error:', error);
+        return res.status(500).json({ message: 'Unable to remove item from wishlist right now.' });
     }
 });
 

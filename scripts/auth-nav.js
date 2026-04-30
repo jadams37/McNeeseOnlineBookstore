@@ -1,9 +1,9 @@
 window.addEventListener('DOMContentLoaded', async () => {
-    const profileLabel = document.querySelector('.profile-label');
-    const profileIcon = document.querySelector('.profile-icon');
+    const profileLink = document.querySelector('.profile-link') || document.querySelector('.profile-label');
+    const profileTextNode = profileLink?.querySelector('.profile-text') || profileLink;
     const profileContainer = document.querySelector('.profile');
 
-    if (!profileLabel) {
+    if (!profileLink || !profileTextNode) {
         return;
     }
 
@@ -67,9 +67,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     };
 
     const fallbackToGuest = () => {
-        profileLabel.textContent = 'Profile';
-        setDestination(profileLabel, 'login.html');
-        setDestination(profileIcon, 'login.html');
+        profileTextNode.textContent = 'Profile';
+        setDestination(profileLink, 'login.html');
 
         removeLogoutLink();
     };
@@ -98,9 +97,8 @@ window.addEventListener('DOMContentLoaded', async () => {
             throw new Error('Missing username');
         }
 
-        profileLabel.textContent = username;
-        setDestination(profileLabel, 'Profile.html');
-        setDestination(profileIcon, 'Profile.html');
+        profileTextNode.textContent = username;
+        setDestination(profileLink, 'Profile.html');
 
         ensureLogoutLink();
     } catch (_error) {

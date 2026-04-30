@@ -1,5 +1,11 @@
 let onSecondStep = false;
 
+const isValidPassword = (password) => (
+    password.length >= 8
+    && /\d/.test(password)
+    && /[^A-Za-z0-9]/.test(password)
+);
+
 const renderMessage = (text, isError = false) => {
     const messageNode = document.getElementById('signup-message');
     if (!messageNode) {
@@ -34,10 +40,15 @@ const moveToSecondStep = () => {
 
     const email = document.getElementById('email')?.value?.trim();
     const username = document.getElementById('username')?.value?.trim();
-    const password = document.getElementById('password')?.value?.trim();
+    const password = document.getElementById('password')?.value || '';
 
-    if (!email || !username || !password) {
+    if (!email || !username || !password.trim()) {
         renderMessage('Please complete email, username, and password before continuing.', true);
+        return;
+    }
+
+    if (!isValidPassword(password)) {
+        renderMessage('Password must be at least 8 characters long and include a number and a special character.', true);
         return;
     }
 
@@ -64,6 +75,11 @@ const submitRegistration = async () => {
 
     if (!payload.fullName) {
         renderMessage('Full name is required.', true);
+        return;
+    }
+
+    if (!isValidPassword(payload.password || '')) {
+        renderMessage('Password must be at least 8 characters long and include a number and a special character.', true);
         return;
     }
 

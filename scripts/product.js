@@ -36,9 +36,10 @@ window.addEventListener('DOMContentLoaded', async () => {
             pageSubtitle.textContent = `${product.author || 'Unknown Author'} | ${product.condition || 'N/A'} | ${product.category_name || 'General'}`;
         }
 
+        const imagePath = product.image_path || 'images/placeholder.jpg';
         primaryGrid.innerHTML = `
             <div class="product-card">
-                <div class="product-image">Product</div>
+                <img src="${imagePath}" alt="${product.title}" class="product-image">
                 <h3>${product.title || 'Untitled Product'}</h3>
                 <p class="price">$${price}</p>
                 <p class="description">Author: ${product.author || 'N/A'}</p>
@@ -72,23 +73,20 @@ window.addEventListener('DOMContentLoaded', async () => {
                             quantity: 1
                         })
                     });
-
-                    console.log('Response status:', response.status);
-                    console.log('Response headers:', response.headers);
                     const responseText = await response.text();
-                    console.log('Response text:', responseText);
-
-                    if (!response.ok) {
-                        // Try to parse as JSON, but if it fails, show the raw response
+                    let responseData = {};
+                    if (responseText) {
                         try {
-                            const data = JSON.parse(responseText);
-                            throw new Error(data.message || 'Unable to add to cart.');
-                        } catch (jsonError) {
-                            throw new Error(`Server error (${response.status}): ${responseText.substring(0, 200)}`);
+                            responseData = JSON.parse(responseText);
+                        } catch (_parseError) {
+                            responseData = {};
                         }
                     }
 
-                    const data = JSON.parse(responseText);
+                    if (!response.ok) {
+                        const fallbackMessage = responseText ? responseText.substring(0, 200) : response.statusText;
+                        throw new Error(responseData.message || `Server error (${response.status}): ${fallbackMessage}`);
+                    }
 
                     alert('Item added to cart!');
                 } catch (error) {
@@ -112,7 +110,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         }
 
         const relatedProducts = (relatedData.products || [])
-            .filter((item) => item.product_id !== productId)
+            .filter((item) => Number(item.product_id) !== Number(productId))
             .slice(0, 4);
 
         if (!relatedGrid) {
@@ -126,9 +124,10 @@ window.addEventListener('DOMContentLoaded', async () => {
 
         relatedGrid.innerHTML = relatedProducts.map((item) => {
             const itemPrice = Number(item.price || 0).toFixed(2);
+            const itemImagePath = item.image_path || 'images/placeholder.jpg';
             return `
                 <div class="product-card">
-                    <div class="product-image">Product</div>
+                    <img src="${itemImagePath}" alt="${item.title}" class="product-image">
                     <h3>${item.title || 'Untitled Product'}</h3>
                     <p class="price">$${itemPrice}</p>
                     <p class="description">${item.author || 'Unknown Author'}</p>

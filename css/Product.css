@@ -47,6 +47,9 @@ html {
 body {
     margin: 0;
     background-color: var(--page-bg-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* =========================
@@ -117,6 +120,8 @@ header {
     border: none;
     background-color: transparent;
     width: 100%;
+    min-width: 0;
+    flex: 1;
 }
 
 .search-input::placeholder {
@@ -132,6 +137,16 @@ header {
 .profile {
     display: flex;
     align-items: center;
+}
+
+.profile {
+    gap: 10px;
+}
+
+.profile-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .cart-icon img,
@@ -150,13 +165,25 @@ header {
     transition: color 0.25s;
 }
 
+.logout-link {
+    color: var(--nav-label-color);
+    font-family: "Kaisei Opti", sans-serif;
+    font-size: var(--nav-subtext-font-size);
+    text-decoration: none;
+    transition: color 0.25s;
+}
+
+.logout-link:hover {
+    color: rgba(255, 255, 255, 0.25);
+}
+
 .cart:hover .cart-label,
-.profile:hover .profile-label {
+.profile-link:hover .profile-text {
     color: rgba(255, 255, 255, 0.25);
 }
 
 .cart:hover .cart-icon img,
-.profile:hover .profile-icon img {
+.profile-link:hover .profile-icon img {
     opacity: 0.25;
 }
 
@@ -247,13 +274,8 @@ header {
     border-radius: 10px;
     background-color: #E9EEF5;
     border: 1px solid #D2DCE8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Questrial", sans-serif;
-    color: var(--text-light);
+    object-fit: cover;
     margin-bottom: 16px;
-    text-align: center;
 }
 
 .product-card h3 {
@@ -333,7 +355,7 @@ footer {
     background-color: var(--nav-bg-color);
     align-items: center;
     height: 157px;
-    margin-top: 70px;
+    margin-top: auto;
 }
 
 .nav-foot {
